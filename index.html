@@ -654,6 +654,58 @@
             background: #FFF8E7;
         }
 
+        /* 관리자 이용내역 아이템 */
+        .history-item-admin {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-bottom: 8px;
+        }
+
+        .history-item-admin .history-info {
+            flex: 1;
+        }
+
+        .history-item-admin .history-service {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .history-item-admin .history-date {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        .history-item-admin .history-amount {
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
+        .history-item-admin .history-amount.plus {
+            color: #11998e;
+        }
+
+        .history-item-admin .history-amount.minus {
+            color: #eb3349;
+        }
+
+        .history-item-admin .history-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .history-item-admin .history-actions button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
         /* 서비스 입력 폼 */
         .service-form {
             display: flex;
@@ -865,6 +917,7 @@
         <div class="tabs">
             <button class="tab active" onclick="switchTab('charge')">💰 충전</button>
             <button class="tab" onclick="switchTab('use')">✂️ 사용</button>
+            <button class="tab" onclick="switchTab('history')">📋 내역</button>
         </div>
 
         <div id="tab-charge" class="tab-content">
@@ -900,6 +953,12 @@
                 <input type="text" id="use-memo" placeholder="예: 어깨아래 추가">
             </div>
             <button class="btn btn-danger" onclick="useBalance()">✂️ 차감하기</button>
+        </div>
+
+        <div id="tab-history" class="tab-content" style="display:none;">
+            <div class="history-list" id="admin-customer-history" style="max-height:250px;">
+                <!-- 이용 내역이 여기에 표시 -->
+            </div>
         </div>
     </div>
 </div>
@@ -1289,7 +1348,82 @@
         document.getElementById('use-amount').value = '';
         document.getElementById('service-select').value = '';
         document.getElementById('use-memo').value = '';
+        loadAdminCustomerHistory();
         showModal('customer-detail');
+    }
+
+    // 관리자용 고객 이용 내역 로드
+    function loadAdminCustomerHistory() {
+        const historyDiv = document.getElementById('admin-customer-history');
+
+        if (!selectedCustomer.history || selectedCustomer.history.length === 0) {
+            historyDiv.innerHTML = '<div class="empty-state"><div class="icon">📝</div>이용 내역이 없습니다</div>';
+            return;
+        }
+
+        historyDiv.innerHTML = selectedCustomer.history.map((h, index) => `
+            <div class="history-item-admin">
+                <div class="history-info">
+                    <div class="history-service">${h.service}</div>
+                    <div class="history-date">${h.date}</div>
+                </div>
+                <span class="history-amount ${h.amount > 0 ? 'plus' : 'minus'}">
+                    ${h.amount > 0 ? '+' : ''}${h.amount.toLocaleString()}원
+                </span>
+                <div class="history-actions">
+                    <button class="btn-edit" onclick="editHistory(${index})">수정</button>
+                    <button class="btn-delete" onclick="deleteHistory(${index})">삭제</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // 이용 내역 수정
+    function editHistory(index) {
+        const history = selectedCustomer.history[index];
+
+        const newService = prompt('서비스명:', history.service);
+        if (newService === null) return;
+
+        const newAmount = prompt('금액 (차감은 음수로 입력):', history.amount);
+        if (newAmount === null) return;
+
+        const oldAmount = history.amount;
+        const parsedAmount = parseInt(newAmount);
+
+        // 잔액 조정 (기존 금액 복구 후 새 금액 적용)
+        selectedCustomer.balance -= oldAmount; // 기존 금액 복구
+        selectedCustomer.balance += parsedAmount; // 새 금액 적용
+
+        history.service = newService || history.service;
+        history.amount = parsedAmount;
+
+        // UI 업데이트
+        document.getElementById('detail-customer-balance').textContent = selectedCustomer.balance.toLocaleString() + '원';
+        loadAdminCustomerHistory();
+        loadCustomerList();
+
+        alert('내역이 수정되었습니다!');
+    }
+
+    // 이용 내역 삭제
+    function deleteHistory(index) {
+        if (!confirm('정말 삭제하시겠습니까? 잔액도 함께 조정됩니다.')) return;
+
+        const history = selectedCustomer.history[index];
+
+        // 잔액 조정 (삭제되는 금액만큼 복구)
+        selectedCustomer.balance -= history.amount;
+
+        // 내역 삭제
+        selectedCustomer.history.splice(index, 1);
+
+        // UI 업데이트
+        document.getElementById('detail-customer-balance').textContent = selectedCustomer.balance.toLocaleString() + '원';
+        loadAdminCustomerHistory();
+        loadCustomerList();
+
+        alert('내역이 삭제되었습니다!');
     }
 
     // 탭 전환
