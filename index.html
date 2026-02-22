@@ -15,7 +15,7 @@
 
         body {
             font-family: 'Noto Sans KR', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FFD93D 0%, #FF9F45 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -34,7 +34,7 @@
 
         /* 헤더 */
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FFD93D 0%, #FF9F45 100%);
             color: white;
             padding: 30px 20px;
             text-align: center;
@@ -52,8 +52,13 @@
         }
 
         .logo {
-            font-size: 3rem;
             margin-bottom: 10px;
+        }
+
+        .logo img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
         }
 
         /* 컨텐츠 영역 */
@@ -89,7 +94,7 @@
 
         .input-group input:focus, .input-group select:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #FFB347;
         }
 
         .input-group input.large {
@@ -117,13 +122,13 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FFD93D 0%, #FF9F45 100%);
             color: white;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 4px 15px rgba(255, 159, 69, 0.4);
         }
 
         .btn-primary:hover {
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+            box-shadow: 0 6px 20px rgba(255, 159, 69, 0.5);
         }
 
         .btn-secondary {
@@ -150,13 +155,13 @@
 
         /* 잔액 카드 */
         .balance-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FFD93D 0%, #FF9F45 100%);
             color: white;
             border-radius: 20px;
             padding: 30px;
             text-align: center;
             margin-bottom: 25px;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 10px 30px rgba(255, 159, 69, 0.3);
         }
 
         .balance-card .label {
@@ -179,23 +184,26 @@
 
         /* 쿠폰 카드 */
         .coupon-card {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
+            background: linear-gradient(135deg, #FFE066 0%, #FFD93D 100%);
+            color: #5D4E37;
             border-radius: 16px;
             padding: 20px;
+            padding-right: 100px;
             margin-bottom: 20px;
             position: relative;
             overflow: hidden;
         }
 
         .coupon-card::before {
-            content: '🎂';
+            content: '';
             position: absolute;
-            right: 15px;
+            right: 10px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 2.5rem;
-            opacity: 0.8;
+            width: 80px;
+            height: 80px;
+            background: url('birthday.png') no-repeat center;
+            background-size: contain;
         }
 
         .coupon-card .coupon-title {
@@ -282,7 +290,7 @@
         }
 
         .mode-btn:hover {
-            border-color: #667eea;
+            border-color: #FFB347;
         }
 
         .mode-btn .icon {
@@ -341,7 +349,7 @@
 
         .customer-item .balance {
             font-weight: 700;
-            color: #667eea;
+            color: #FF9F45;
         }
 
         /* 모달 */
@@ -411,8 +419,8 @@
         }
 
         .quick-amount-btn:hover {
-            border-color: #667eea;
-            background: #f5f3ff;
+            border-color: #FFB347;
+            background: #FFF8E7;
         }
 
         /* 탭 */
@@ -471,7 +479,7 @@
             width: 40px;
             height: 40px;
             border: 4px solid #f0f0f0;
-            border-top-color: #667eea;
+            border-top-color: #FF9F45;
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin: 0 auto 15px;
@@ -513,7 +521,7 @@
         }
 
         .nav-item.active .text {
-            color: #667eea;
+            color: #FF9F45;
             font-weight: 600;
         }
 
@@ -551,7 +559,7 @@
 
         .price-item .service-price {
             font-weight: 700;
-            color: #667eea;
+            color: #FF9F45;
         }
 
         .price-item .service-actions {
@@ -637,13 +645,13 @@
         /* 가격표 버튼 */
         .btn-outline {
             background: white;
-            border: 2px solid #667eea;
-            color: #667eea;
+            border: 2px solid #FFB347;
+            color: #FF9F45;
             margin-top: 10px;
         }
 
         .btn-outline:hover {
-            background: #f5f3ff;
+            background: #FFF8E7;
         }
 
         /* 서비스 입력 폼 */
@@ -663,7 +671,7 @@
 
         .service-form input:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #FFB347;
         }
 
         .service-form button {
@@ -678,7 +686,7 @@
     <!-- 메인 화면: 모드 선택 -->
     <div id="screen-home" class="screen active">
         <div class="header">
-            <div class="logo">💇</div>
+            <div class="logo"><img src="logo.png" alt="살롱페이"></div>
             <h1>살롱페이</h1>
             <p>미용실 선불 잔액 관리</p>
         </div>
@@ -702,7 +710,7 @@
     <!-- 고객 로그인 -->
     <div id="screen-customer-login" class="screen">
         <div class="header">
-            <div class="logo">👤</div>
+            <div class="logo"><img src="logo.png" alt="살롱페이"></div>
             <h1>잔액 조회</h1>
             <p>이름과 전화번호 뒷자리를 입력하세요</p>
         </div>
@@ -756,7 +764,7 @@
     <!-- 관리자 로그인 -->
     <div id="screen-admin-login" class="screen">
         <div class="header">
-            <div class="logo">🔐</div>
+            <div class="logo"><img src="logo.png" alt="살롱페이"></div>
             <h1>관리자 로그인</h1>
             <p>비밀번호를 입력하세요</p>
         </div>
@@ -989,7 +997,7 @@
                 </select>
             </div>
 
-            <div style="background:#667eea; color:white; padding:12px; border-radius:8px; text-align:center; margin-bottom:15px;">
+            <div style="background:#FFB347; color:white; padding:12px; border-radius:8px; text-align:center; margin-bottom:15px;">
                 <small>쿠폰 미리보기</small>
                 <div id="coupon-preview" style="font-weight:700; margin-top:5px;">컷 서비스 50% 할인</div>
             </div>
