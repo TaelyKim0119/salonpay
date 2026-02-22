@@ -528,6 +528,148 @@
             font-size: 3rem;
             margin-bottom: 15px;
         }
+
+        /* 서비스 가격표 */
+        .price-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        .price-item .service-name {
+            font-weight: 500;
+        }
+
+        .price-item .service-price {
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .price-item .service-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .price-item .service-actions button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .btn-edit {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        /* AI 리마인더 카드 */
+        .reminder-card {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .reminder-card .reminder-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .reminder-card .reminder-desc {
+            font-size: 0.9rem;
+            opacity: 0.95;
+        }
+
+        /* 생일 고객 배지 */
+        .birthday-badge {
+            background: #f093fb;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-left: 8px;
+        }
+
+        /* 쿠폰 관리 */
+        .coupon-status {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .coupon-status.active {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .coupon-status.used {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .coupon-status.none {
+            background: #f5f5f5;
+            color: #999;
+        }
+
+        /* 가격표 버튼 */
+        .btn-outline {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            margin-top: 10px;
+        }
+
+        .btn-outline:hover {
+            background: #f5f3ff;
+        }
+
+        /* 서비스 입력 폼 */
+        .service-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .service-form input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .service-form input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .service-form button {
+            padding: 12px 20px;
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>
@@ -552,7 +694,7 @@
                 </div>
             </div>
             <p style="text-align:center; color:#999; font-size:0.9rem;">
-                전화번호 뒷자리 4자리로<br>간편하게 잔액을 확인하세요
+                이름과 전화번호 뒷자리로<br>간편하게 잔액을 확인하세요
             </p>
         </div>
     </div>
@@ -562,11 +704,16 @@
         <div class="header">
             <div class="logo">👤</div>
             <h1>잔액 조회</h1>
-            <p>전화번호 뒷자리 4자리를 입력하세요</p>
+            <p>이름과 전화번호 뒷자리를 입력하세요</p>
         </div>
         <div class="content">
             <div id="customer-login-message"></div>
             <div class="input-group">
+                <label>이름</label>
+                <input type="text" id="customer-name" placeholder="홍길동">
+            </div>
+            <div class="input-group">
+                <label>전화번호 뒷자리 4자리</label>
                 <input type="tel" id="phone-last4" class="large" maxlength="4" placeholder="0000" inputmode="numeric">
             </div>
             <button class="btn btn-primary" onclick="customerLogin()">조회하기</button>
@@ -583,6 +730,10 @@
                 <div class="customer-name" id="customer-name-display">고객님</div>
             </div>
 
+            <div id="reminder-container">
+                <!-- AI 리마인더가 여기에 표시 -->
+            </div>
+
             <div id="coupon-container">
                 <!-- 쿠폰이 있으면 여기에 표시 -->
             </div>
@@ -597,7 +748,8 @@
                 </div>
             </div>
 
-            <button class="btn btn-secondary" onclick="customerLogout()" style="margin-top:20px;">← 로그아웃</button>
+            <button class="btn btn-outline" onclick="showModal('price-list')">💇 서비스 가격표 보기</button>
+            <button class="btn btn-secondary" onclick="customerLogout()">← 로그아웃</button>
         </div>
     </div>
 
@@ -642,13 +794,21 @@
                 <div class="icon">👥</div>
                 <div class="text">고객</div>
             </button>
+            <button class="nav-item" onclick="showModal('service-manage')">
+                <div class="icon">💇</div>
+                <div class="text">서비스</div>
+            </button>
+            <button class="nav-item" onclick="showModal('birthday-manage')">
+                <div class="icon">🎂</div>
+                <div class="text">생일쿠폰</div>
+            </button>
             <button class="nav-item" onclick="showModal('settings')">
                 <div class="icon">⚙️</div>
                 <div class="text">설정</div>
             </button>
             <button class="nav-item" onclick="adminLogout()">
                 <div class="icon">🚪</div>
-                <div class="text">로그아웃</div>
+                <div class="text">나가기</div>
             </button>
         </div>
     </div>
@@ -720,14 +880,7 @@
                 <label>서비스 선택</label>
                 <select id="service-select" onchange="updateServiceAmount()">
                     <option value="">서비스 선택...</option>
-                    <option value="15000">주니어 컷 - 15,000원</option>
-                    <option value="18000">남성 컷 - 18,000원</option>
-                    <option value="21000">여성 컷 - 21,000원</option>
-                    <option value="70000">일반펌 - 70,000원</option>
-                    <option value="100000">열펌 - 100,000원</option>
-                    <option value="50000">뿌리염색 - 50,000원</option>
-                    <option value="70000">전체염색 - 70,000원</option>
-                    <option value="custom">직접 입력</option>
+                    <!-- 동적으로 생성됨 -->
                 </select>
             </div>
             <div class="input-group">
@@ -762,6 +915,55 @@
     </div>
 </div>
 
+<!-- 고객용 가격표 모달 -->
+<div id="modal-price-list" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>💇 서비스 가격표</h3>
+            <button class="modal-close" onclick="hideModal('price-list')">&times;</button>
+        </div>
+        <div class="price-list" id="customer-price-list">
+            <!-- 가격표가 여기에 표시 -->
+        </div>
+    </div>
+</div>
+
+<!-- 관리자용 서비스 관리 모달 -->
+<div id="modal-service-manage" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>💇 서비스 가격 관리</h3>
+            <button class="modal-close" onclick="hideModal('service-manage')">&times;</button>
+        </div>
+        <div class="service-form">
+            <input type="text" id="new-service-name" placeholder="서비스명">
+            <input type="number" id="new-service-price" placeholder="가격">
+            <button class="btn btn-primary btn-small" onclick="addService()">추가</button>
+        </div>
+        <div class="price-list" id="admin-service-list">
+            <!-- 서비스 목록이 여기에 표시 -->
+        </div>
+    </div>
+</div>
+
+<!-- 생일 쿠폰 관리 모달 -->
+<div id="modal-birthday-manage" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>🎂 생일 쿠폰 관리</h3>
+            <button class="modal-close" onclick="hideModal('birthday-manage')">&times;</button>
+        </div>
+        <div class="input-group">
+            <label>쿠폰 내용 설정</label>
+            <input type="text" id="birthday-coupon-desc" placeholder="예: 컷 서비스 50% 할인" value="컷 서비스 50% 할인">
+        </div>
+        <h4 style="margin: 20px 0 10px; color: #666;">🎉 이번 달 생일 고객</h4>
+        <div class="customer-list" id="birthday-customer-list">
+            <!-- 생일 고객 목록 -->
+        </div>
+    </div>
+</div>
+
 <script>
     // Firebase 설정 - 나중에 실제 값으로 교체
     const firebaseConfig = {
@@ -777,18 +979,29 @@
     // firebase.initializeApp(firebaseConfig);
     // const db = firebase.firestore();
 
+    // 서비스 목록 데이터
+    let mockServices = [
+        { id: '1', name: '주니어 컷', price: 15000, category: 'cut' },
+        { id: '2', name: '남성 컷', price: 18000, category: 'cut' },
+        { id: '3', name: '여성 컷', price: 21000, category: 'cut' },
+        { id: '4', name: '일반펌', price: 70000, category: 'perm' },
+        { id: '5', name: '열펌', price: 100000, category: 'perm' },
+        { id: '6', name: '뿌리염색', price: 50000, category: 'color' },
+        { id: '7', name: '전체염색', price: 70000, category: 'color' },
+    ];
+
     // 임시 데이터 (Firebase 연결 전 테스트용)
     let mockCustomers = [
-        { id: '1', name: '김민지', phone: '010-1234-5678', lastFour: '5678', balance: 150000, birthday: '1995-03-15', history: [
+        { id: '1', name: '김민지', phone: '010-1234-5678', lastFour: '5678', balance: 150000, birthday: '1995-03-15', birthdayCoupon: null, history: [
             { date: '2026-02-20', type: 'use', amount: -21000, service: '여성 컷' },
             { date: '2026-02-15', type: 'charge', amount: 100000, service: '충전' },
             { date: '2026-02-10', type: 'use', amount: -70000, service: '전체염색' },
         ]},
-        { id: '2', name: '이서준', phone: '010-9876-5432', lastFour: '5432', balance: 80000, birthday: '1990-07-22', history: [
+        { id: '2', name: '이서준', phone: '010-9876-5432', lastFour: '5432', balance: 80000, birthday: '1990-07-22', birthdayCoupon: null, history: [
             { date: '2026-02-18', type: 'use', amount: -18000, service: '남성 컷' },
             { date: '2026-02-01', type: 'charge', amount: 100000, service: '충전' },
         ]},
-        { id: '3', name: '박지영', phone: '010-5555-1234', lastFour: '1234', balance: 250000, birthday: '1988-12-03', history: [
+        { id: '3', name: '박지영', phone: '010-5555-1234', lastFour: '1234', balance: 250000, birthday: '1988-02-03', birthdayCoupon: 'active', history: [
             { date: '2026-02-19', type: 'charge', amount: 300000, service: '충전' },
             { date: '2026-02-19', type: 'use', amount: -50000, service: '뿌리염색' },
         ]},
@@ -805,8 +1018,9 @@
 
         // 화면별 초기화
         if (screenId === 'customer-login') {
+            document.getElementById('customer-name').value = '';
             document.getElementById('phone-last4').value = '';
-            document.getElementById('phone-last4').focus();
+            document.getElementById('customer-name').focus();
         } else if (screenId === 'admin-login') {
             document.getElementById('admin-password').value = '';
             document.getElementById('admin-password').focus();
@@ -817,19 +1031,25 @@
 
     // 고객 로그인
     function customerLogin() {
+        const name = document.getElementById('customer-name').value.trim();
         const lastFour = document.getElementById('phone-last4').value;
         const msgDiv = document.getElementById('customer-login-message');
 
-        if (lastFour.length !== 4) {
-            msgDiv.innerHTML = '<div class="message error">4자리 숫자를 입력하세요</div>';
+        if (!name) {
+            msgDiv.innerHTML = '<div class="message error">이름을 입력하세요</div>';
             return;
         }
 
-        // 고객 찾기
-        const customer = mockCustomers.find(c => c.lastFour === lastFour);
+        if (lastFour.length !== 4) {
+            msgDiv.innerHTML = '<div class="message error">전화번호 뒷자리 4자리를 입력하세요</div>';
+            return;
+        }
+
+        // 고객 찾기 (이름 + 뒷자리 4자리 모두 일치)
+        const customer = mockCustomers.find(c => c.lastFour === lastFour && c.name === name);
 
         if (!customer) {
-            msgDiv.innerHTML = '<div class="message error">등록되지 않은 번호입니다</div>';
+            msgDiv.innerHTML = '<div class="message error">일치하는 고객 정보가 없습니다</div>';
             return;
         }
 
@@ -843,16 +1063,20 @@
         document.getElementById('customer-balance').textContent = currentCustomer.balance.toLocaleString() + '원';
         document.getElementById('customer-name-display').textContent = currentCustomer.name + ' 고객님';
 
+        // AI 리마인더 표시
+        displayAIReminder();
+
         // 쿠폰 체크 (생일)
         const couponContainer = document.getElementById('coupon-container');
         const today = new Date();
         const birthday = new Date(currentCustomer.birthday);
+        const couponDesc = localStorage.getItem('birthdayCouponDesc') || '컷 서비스 50% 할인';
 
-        if (today.getMonth() === birthday.getMonth()) {
+        if (today.getMonth() === birthday.getMonth() && currentCustomer.birthdayCoupon === 'active') {
             couponContainer.innerHTML = `
                 <div class="coupon-card">
                     <div class="coupon-title">🎂 생일 축하 쿠폰</div>
-                    <div class="coupon-desc">컷 서비스 50% 할인 (이번 달까지)</div>
+                    <div class="coupon-desc">${couponDesc} (이번 달까지)</div>
                 </div>
             `;
         } else {
@@ -876,6 +1100,59 @@
         } else {
             historyDiv.innerHTML = '<div class="empty-state"><div class="icon">📝</div>이용 내역이 없습니다</div>';
         }
+    }
+
+    // AI 리마인더 계산 및 표시
+    function displayAIReminder() {
+        const reminderContainer = document.getElementById('reminder-container');
+        const history = currentCustomer.history || [];
+
+        // 마지막 서비스 찾기 (충전 제외)
+        const lastService = history.find(h => h.type === 'use');
+
+        if (!lastService) {
+            reminderContainer.innerHTML = '';
+            return;
+        }
+
+        const lastDate = new Date(lastService.date);
+        const today = new Date();
+        const daysSince = Math.floor((today - lastDate) / (1000 * 60 * 60 * 24));
+
+        // 서비스 유형에 따른 추천 주기 계산
+        let recommendDays = 30; // 기본 30일
+        let serviceType = '시술';
+
+        if (lastService.service.includes('컷')) {
+            recommendDays = 35; // 컷은 5주
+            serviceType = '커트';
+        } else if (lastService.service.includes('염색')) {
+            recommendDays = 45; // 염색은 6주
+            serviceType = '염색';
+        } else if (lastService.service.includes('펌')) {
+            recommendDays = 90; // 펌은 3개월
+            serviceType = '펌';
+        }
+
+        const nextDate = new Date(lastDate);
+        nextDate.setDate(nextDate.getDate() + recommendDays);
+        const daysUntil = Math.floor((nextDate - today) / (1000 * 60 * 60 * 24));
+
+        let message = '';
+        if (daysUntil <= 0) {
+            message = `${serviceType} 하신 지 ${daysSince}일이 지났어요. 새로운 스타일로 변신할 때가 됐어요! ✨`;
+        } else if (daysUntil <= 7) {
+            message = `${serviceType} 예약하실 때가 다가왔어요! ${daysUntil}일 후면 추천 방문일이에요. 💇`;
+        } else {
+            message = `마지막 ${serviceType}: ${daysSince}일 전 | 다음 추천 방문: ${daysUntil}일 후`;
+        }
+
+        reminderContainer.innerHTML = `
+            <div class="reminder-card">
+                <div class="reminder-title">🤖 AI 스타일 리마인더</div>
+                <div class="reminder-desc">${message}</div>
+            </div>
+        `;
     }
 
     // 고객 로그아웃
@@ -1023,7 +1300,8 @@
         const amount = parseInt(document.getElementById('use-amount').value);
         const memo = document.getElementById('use-memo').value;
         const serviceSelect = document.getElementById('service-select');
-        const serviceName = serviceSelect.options[serviceSelect.selectedIndex]?.text.split(' - ')[0] || memo || '서비스';
+        const selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
+        const serviceName = selectedOption?.dataset?.serviceName || selectedOption?.text.split(' - ')[0] || memo || '서비스';
 
         if (!amount || amount <= 0) {
             alert('차감 금액을 입력하세요');
@@ -1118,9 +1396,191 @@
         alert('설정이 저장되었습니다!');
     }
 
+    // 서비스 목록 로드 (관리자용)
+    function loadServiceList() {
+        const listDiv = document.getElementById('admin-service-list');
+
+        if (mockServices.length === 0) {
+            listDiv.innerHTML = '<div class="empty-state"><div class="icon">💇</div>등록된 서비스가 없습니다</div>';
+            return;
+        }
+
+        listDiv.innerHTML = mockServices.map(s => `
+            <div class="price-item">
+                <span class="service-name">${s.name}</span>
+                <span class="service-price">${s.price.toLocaleString()}원</span>
+                <div class="service-actions">
+                    <button class="btn-edit" onclick="editService('${s.id}')">수정</button>
+                    <button class="btn-delete" onclick="deleteService('${s.id}')">삭제</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // 서비스 추가
+    function addService() {
+        const name = document.getElementById('new-service-name').value.trim();
+        const price = parseInt(document.getElementById('new-service-price').value);
+
+        if (!name || !price) {
+            alert('서비스명과 가격을 입력하세요');
+            return;
+        }
+
+        const newService = {
+            id: Date.now().toString(),
+            name: name,
+            price: price,
+            category: 'custom'
+        };
+
+        mockServices.push(newService);
+        loadServiceList();
+        updateServiceSelect();
+
+        document.getElementById('new-service-name').value = '';
+        document.getElementById('new-service-price').value = '';
+
+        alert(`${name} 서비스가 추가되었습니다!`);
+    }
+
+    // 서비스 수정
+    function editService(serviceId) {
+        const service = mockServices.find(s => s.id === serviceId);
+        const newName = prompt('서비스명:', service.name);
+        if (newName === null) return;
+
+        const newPrice = prompt('가격:', service.price);
+        if (newPrice === null) return;
+
+        service.name = newName || service.name;
+        service.price = parseInt(newPrice) || service.price;
+
+        loadServiceList();
+        updateServiceSelect();
+        alert('서비스가 수정되었습니다!');
+    }
+
+    // 서비스 삭제
+    function deleteService(serviceId) {
+        if (!confirm('정말 삭제하시겠습니까?')) return;
+
+        mockServices = mockServices.filter(s => s.id !== serviceId);
+        loadServiceList();
+        updateServiceSelect();
+        alert('서비스가 삭제되었습니다!');
+    }
+
+    // 서비스 선택 드롭다운 업데이트
+    function updateServiceSelect() {
+        const select = document.getElementById('service-select');
+        select.innerHTML = '<option value="">서비스 선택...</option>';
+
+        mockServices.forEach(s => {
+            const option = document.createElement('option');
+            option.value = s.price;
+            option.textContent = `${s.name} - ${s.price.toLocaleString()}원`;
+            option.dataset.serviceName = s.name;
+            select.appendChild(option);
+        });
+
+        const customOption = document.createElement('option');
+        customOption.value = 'custom';
+        customOption.textContent = '직접 입력';
+        select.appendChild(customOption);
+    }
+
+    // 고객용 가격표 표시
+    function loadPriceListForCustomer() {
+        const listDiv = document.getElementById('customer-price-list');
+
+        if (mockServices.length === 0) {
+            listDiv.innerHTML = '<div class="empty-state"><div class="icon">💇</div>등록된 서비스가 없습니다</div>';
+            return;
+        }
+
+        listDiv.innerHTML = mockServices.map(s => `
+            <div class="price-item">
+                <span class="service-name">${s.name}</span>
+                <span class="service-price">${s.price.toLocaleString()}원</span>
+            </div>
+        `).join('');
+    }
+
+    // 생일 고객 목록 로드
+    function loadBirthdayCustomers() {
+        const listDiv = document.getElementById('birthday-customer-list');
+        const today = new Date();
+        const currentMonth = today.getMonth();
+
+        const birthdayCustomers = mockCustomers.filter(c => {
+            if (!c.birthday) return false;
+            const bday = new Date(c.birthday);
+            return bday.getMonth() === currentMonth;
+        });
+
+        if (birthdayCustomers.length === 0) {
+            listDiv.innerHTML = '<div class="empty-state"><div class="icon">🎂</div>이번 달 생일인 고객이 없습니다</div>';
+            return;
+        }
+
+        listDiv.innerHTML = birthdayCustomers.map(c => {
+            const bday = new Date(c.birthday);
+            const couponStatus = c.birthdayCoupon === 'active' ? 'active' :
+                                 c.birthdayCoupon === 'used' ? 'used' : 'none';
+            const couponText = couponStatus === 'active' ? '쿠폰 발급됨' :
+                               couponStatus === 'used' ? '사용 완료' : '미발급';
+
+            return `
+                <div class="customer-item">
+                    <div class="info">
+                        <h4>${c.name} <span class="birthday-badge">${bday.getMonth() + 1}/${bday.getDate()}</span></h4>
+                        <p>${c.phone}</p>
+                    </div>
+                    <div>
+                        <span class="coupon-status ${couponStatus}">${couponText}</span>
+                        ${couponStatus === 'none' ? `<button class="btn btn-primary btn-small" style="margin-left:8px;" onclick="issueBirthdayCoupon('${c.id}')">발급</button>` : ''}
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    // 생일 쿠폰 발급
+    function issueBirthdayCoupon(customerId) {
+        const customer = mockCustomers.find(c => c.id === customerId);
+        const couponDesc = document.getElementById('birthday-coupon-desc').value || '컷 서비스 50% 할인';
+
+        customer.birthdayCoupon = 'active';
+        localStorage.setItem('birthdayCouponDesc', couponDesc);
+
+        loadBirthdayCustomers();
+        alert(`${customer.name} 고객님에게 생일 쿠폰이 발급되었습니다!`);
+    }
+
+    // 모달 열릴 때 데이터 로드
+    const originalShowModal = showModal;
+    showModal = function(modalId) {
+        originalShowModal(modalId);
+
+        if (modalId === 'service-manage') {
+            loadServiceList();
+        } else if (modalId === 'price-list') {
+            loadPriceListForCustomer();
+        } else if (modalId === 'birthday-manage') {
+            loadBirthdayCustomers();
+        }
+    };
+
     // 페이지 로드 시
     document.addEventListener('DOMContentLoaded', () => {
+        // 서비스 드롭다운 초기화
+        updateServiceSelect();
+
         // 엔터키 이벤트
+        document.getElementById('customer-name').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') document.getElementById('phone-last4').focus();
+        });
         document.getElementById('phone-last4').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') customerLogin();
         });
