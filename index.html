@@ -953,11 +953,51 @@
             <h3>🎂 생일 쿠폰 관리</h3>
             <button class="modal-close" onclick="hideModal('birthday-manage')">&times;</button>
         </div>
-        <div class="input-group">
-            <label>쿠폰 내용 설정</label>
-            <input type="text" id="birthday-coupon-desc" placeholder="예: 컷 서비스 50% 할인" value="컷 서비스 50% 할인">
+
+        <div style="background:#f8f9fa; padding:15px; border-radius:12px; margin-bottom:20px;">
+            <h4 style="margin-bottom:15px; color:#333;">쿠폰 설정</h4>
+
+            <div class="input-group" style="margin-bottom:15px;">
+                <label>쿠폰 사용</label>
+                <select id="birthday-coupon-enabled">
+                    <option value="true">사용함</option>
+                    <option value="false">사용 안 함</option>
+                </select>
+            </div>
+
+            <div class="input-group" style="margin-bottom:15px;">
+                <label>할인 유형</label>
+                <select id="birthday-coupon-type" onchange="updateCouponPreview()">
+                    <option value="percent">% 할인</option>
+                    <option value="amount">금액 할인</option>
+                    <option value="free">무료 서비스</option>
+                </select>
+            </div>
+
+            <div class="input-group" style="margin-bottom:15px;" id="coupon-value-group">
+                <label>할인 값</label>
+                <input type="number" id="birthday-coupon-value" placeholder="50" value="50" onchange="updateCouponPreview()">
+            </div>
+
+            <div class="input-group" style="margin-bottom:15px;">
+                <label>적용 서비스</label>
+                <select id="birthday-coupon-service">
+                    <option value="all">전체 서비스</option>
+                    <option value="cut">컷 서비스만</option>
+                    <option value="perm">펌 서비스만</option>
+                    <option value="color">염색 서비스만</option>
+                </select>
+            </div>
+
+            <div style="background:#667eea; color:white; padding:12px; border-radius:8px; text-align:center; margin-bottom:15px;">
+                <small>쿠폰 미리보기</small>
+                <div id="coupon-preview" style="font-weight:700; margin-top:5px;">컷 서비스 50% 할인</div>
+            </div>
+
+            <button class="btn btn-primary" onclick="saveBirthdayCouponSettings()">설정 저장</button>
         </div>
-        <h4 style="margin: 20px 0 10px; color: #666;">🎉 이번 달 생일 고객</h4>
+
+        <h4 style="margin: 10px 0; color: #666;">🎉 이번 달 생일 고객</h4>
         <div class="customer-list" id="birthday-customer-list">
             <!-- 생일 고객 목록 -->
         </div>
@@ -1070,13 +1110,13 @@
         const couponContainer = document.getElementById('coupon-container');
         const today = new Date();
         const birthday = new Date(currentCustomer.birthday);
-        const couponDesc = localStorage.getItem('birthdayCouponDesc') || '컷 서비스 50% 할인';
+        const couponSettings = getBirthdayCouponSettings();
 
-        if (today.getMonth() === birthday.getMonth() && currentCustomer.birthdayCoupon === 'active') {
+        if (couponSettings.enabled && today.getMonth() === birthday.getMonth() && currentCustomer.birthdayCoupon === 'active') {
             couponContainer.innerHTML = `
                 <div class="coupon-card">
                     <div class="coupon-title">🎂 생일 축하 쿠폰</div>
-                    <div class="coupon-desc">${couponDesc} (이번 달까지)</div>
+                    <div class="coupon-desc">${couponSettings.description} (이번 달까지)</div>
                 </div>
             `;
         } else {
@@ -1549,13 +1589,87 @@
     // 생일 쿠폰 발급
     function issueBirthdayCoupon(customerId) {
         const customer = mockCustomers.find(c => c.id === customerId);
-        const couponDesc = document.getElementById('birthday-coupon-desc').value || '컷 서비스 50% 할인';
 
         customer.birthdayCoupon = 'active';
-        localStorage.setItem('birthdayCouponDesc', couponDesc);
 
         loadBirthdayCustomers();
         alert(`${customer.name} 고객님에게 생일 쿠폰이 발급되었습니다!`);
+    }
+
+    // 쿠폰 미리보기 업데이트
+    function updateCouponPreview() {
+        const type = document.getElementById('birthday-coupon-type').value;
+        const value = document.getElementById('birthday-coupon-value').value || 0;
+        const service = document.getElementById('birthday-coupon-service');
+        const serviceName = service.options[service.selectedIndex].text;
+        const valueGroup = document.getElementById('coupon-value-group');
+
+        let preview = '';
+
+        if (type === 'percent') {
+            valueGroup.style.display = 'block';
+            document.querySelector('#coupon-value-group label').textContent = '할인율 (%)';
+            preview = `${serviceName} ${value}% 할인`;
+        } else if (type === 'amount') {
+            valueGroup.style.display = 'block';
+            document.querySelector('#coupon-value-group label').textContent = '할인 금액 (원)';
+            preview = `${serviceName} ${parseInt(value).toLocaleString()}원 할인`;
+        } else if (type === 'free') {
+            valueGroup.style.display = 'none';
+            preview = `${serviceName} 무료`;
+        }
+
+        document.getElementById('coupon-preview').textContent = preview;
+    }
+
+    // 생일 쿠폰 설정 저장
+    function saveBirthdayCouponSettings() {
+        const enabled = document.getElementById('birthday-coupon-enabled').value;
+        const type = document.getElementById('birthday-coupon-type').value;
+        const value = document.getElementById('birthday-coupon-value').value;
+        const service = document.getElementById('birthday-coupon-service').value;
+        const preview = document.getElementById('coupon-preview').textContent;
+
+        const settings = {
+            enabled: enabled === 'true',
+            type: type,
+            value: parseInt(value) || 0,
+            service: service,
+            description: preview
+        };
+
+        localStorage.setItem('birthdayCouponSettings', JSON.stringify(settings));
+        alert('생일 쿠폰 설정이 저장되었습니다!');
+    }
+
+    // 생일 쿠폰 설정 불러오기
+    function loadBirthdayCouponSettings() {
+        const saved = localStorage.getItem('birthdayCouponSettings');
+
+        if (saved) {
+            const settings = JSON.parse(saved);
+            document.getElementById('birthday-coupon-enabled').value = settings.enabled ? 'true' : 'false';
+            document.getElementById('birthday-coupon-type').value = settings.type || 'percent';
+            document.getElementById('birthday-coupon-value').value = settings.value || 50;
+            document.getElementById('birthday-coupon-service').value = settings.service || 'all';
+        }
+
+        updateCouponPreview();
+    }
+
+    // 쿠폰 설정 가져오기
+    function getBirthdayCouponSettings() {
+        const saved = localStorage.getItem('birthdayCouponSettings');
+        if (saved) {
+            return JSON.parse(saved);
+        }
+        return {
+            enabled: true,
+            type: 'percent',
+            value: 50,
+            service: 'all',
+            description: '전체 서비스 50% 할인'
+        };
     }
 
     // 모달 열릴 때 데이터 로드
@@ -1568,6 +1682,7 @@
         } else if (modalId === 'price-list') {
             loadPriceListForCustomer();
         } else if (modalId === 'birthday-manage') {
+            loadBirthdayCouponSettings();
             loadBirthdayCustomers();
         }
     };
