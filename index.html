@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="살롱페이 - 미용실 선불 잔액 관리 서비스">
+    <title>살롱페이 - Salon Pay</title>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            width: 100%;
+            max-width: 420px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        /* 헤더 */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        /* 컨텐츠 영역 */
+        .content {
+            padding: 30px 25px;
+        }
+
+        /* 화면 전환 */
+        .screen { display: none; }
+        .screen.active { display: block; }
+
+        /* 입력 필드 */
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .input-group input.large {
+            font-size: 2rem;
+            text-align: center;
+            letter-spacing: 10px;
+            font-weight: 700;
+        }
+
+        /* 버튼 */
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn-secondary {
+            background: #f5f5f5;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+            color: white;
+        }
+
+        .btn-small {
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            width: auto;
+        }
+
+        /* 잔액 카드 */
+        .balance-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .balance-card .label {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .balance-card .amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .balance-card .customer-name {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.3);
+            font-size: 1.1rem;
+        }
+
+        /* 쿠폰 카드 */
+        .coupon-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .coupon-card::before {
+            content: '🎂';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2.5rem;
+            opacity: 0.8;
+        }
+
+        .coupon-card .coupon-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .coupon-card .coupon-desc {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* 거래 내역 */
+        .history-section h3 {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .history-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .history-item .info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .history-item .service {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .history-item .date {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .history-item .amount {
+            font-weight: 700;
+        }
+
+        .history-item .amount.plus {
+            color: #11998e;
+        }
+
+        .history-item .amount.minus {
+            color: #eb3349;
+        }
+
+        /* 모드 선택 */
+        .mode-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .mode-btn {
+            flex: 1;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 16px;
+            background: white;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .mode-btn:hover {
+            border-color: #667eea;
+        }
+
+        .mode-btn .icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .mode-btn .text {
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* 관리자 대시보드 */
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .admin-header h2 {
+            font-size: 1.3rem;
+            color: #333;
+        }
+
+        .customer-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .customer-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .customer-item:hover {
+            background: #e9ecef;
+        }
+
+        .customer-item .info h4 {
+            font-size: 1rem;
+            margin-bottom: 3px;
+        }
+
+        .customer-item .info p {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .customer-item .balance {
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        /* 모달 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            width: 100%;
+            max-width: 380px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h3 {
+            font-size: 1.2rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        /* 빠른 금액 버튼 */
+        .quick-amounts {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .quick-amount-btn {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .quick-amount-btn:hover {
+            border-color: #667eea;
+            background: #f5f3ff;
+        }
+
+        /* 탭 */
+        .tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 20px;
+            background: #f0f0f0;
+            padding: 5px;
+            border-radius: 12px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 500;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .tab.active {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* 메시지 */
+        .message {
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .message.error {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .message.success {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        /* 로딩 */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f0f0f0;
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* 하단 네비게이션 */
+        .bottom-nav {
+            display: flex;
+            border-top: 1px solid #eee;
+        }
+
+        .nav-item {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            background: white;
+            cursor: pointer;
+            text-align: center;
+            font-family: inherit;
+            transition: background 0.2s;
+        }
+
+        .nav-item:hover {
+            background: #f5f5f5;
+        }
+
+        .nav-item .icon {
+            font-size: 1.3rem;
+            margin-bottom: 3px;
+        }
+
+        .nav-item .text {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .nav-item.active .text {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        /* 빈 상태 */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+
+        .empty-state .icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- 메인 화면: 모드 선택 -->
+    <div id="screen-home" class="screen active">
+        <div class="header">
+            <div class="logo">💇</div>
+            <h1>살롱페이</h1>
+            <p>미용실 선불 잔액 관리</p>
+        </div>
+        <div class="content">
+            <div class="mode-selector">
+                <div class="mode-btn" onclick="showScreen('customer-login')">
+                    <div class="icon">👤</div>
+                    <div class="text">고객 조회</div>
+                </div>
+                <div class="mode-btn" onclick="showScreen('admin-login')">
+                    <div class="icon">🔐</div>
+                    <div class="text">관리자</div>
+                </div>
+            </div>
+            <p style="text-align:center; color:#999; font-size:0.9rem;">
+                전화번호 뒷자리 4자리로<br>간편하게 잔액을 확인하세요
+            </p>
+        </div>
+    </div>
+
+    <!-- 고객 로그인 -->
+    <div id="screen-customer-login" class="screen">
+        <div class="header">
+            <div class="logo">👤</div>
+            <h1>잔액 조회</h1>
+            <p>전화번호 뒷자리 4자리를 입력하세요</p>
+        </div>
+        <div class="content">
+            <div id="customer-login-message"></div>
+            <div class="input-group">
+                <input type="tel" id="phone-last4" class="large" maxlength="4" placeholder="0000" inputmode="numeric">
+            </div>
+            <button class="btn btn-primary" onclick="customerLogin()">조회하기</button>
+            <button class="btn btn-secondary" onclick="showScreen('home')">← 돌아가기</button>
+        </div>
+    </div>
+
+    <!-- 고객 잔액 화면 -->
+    <div id="screen-customer-balance" class="screen">
+        <div class="content" style="padding-top:20px;">
+            <div class="balance-card">
+                <div class="label">💰 내 잔액</div>
+                <div class="amount" id="customer-balance">0원</div>
+                <div class="customer-name" id="customer-name-display">고객님</div>
+            </div>
+
+            <div id="coupon-container">
+                <!-- 쿠폰이 있으면 여기에 표시 -->
+            </div>
+
+            <div class="history-section">
+                <h3>📋 이용 내역</h3>
+                <div class="history-list" id="customer-history">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        불러오는 중...
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-secondary" onclick="customerLogout()" style="margin-top:20px;">← 로그아웃</button>
+        </div>
+    </div>
+
+    <!-- 관리자 로그인 -->
+    <div id="screen-admin-login" class="screen">
+        <div class="header">
+            <div class="logo">🔐</div>
+            <h1>관리자 로그인</h1>
+            <p>비밀번호를 입력하세요</p>
+        </div>
+        <div class="content">
+            <div id="admin-login-message"></div>
+            <div class="input-group">
+                <input type="password" id="admin-password" placeholder="비밀번호" class="large">
+            </div>
+            <button class="btn btn-primary" onclick="adminLogin()">로그인</button>
+            <button class="btn btn-secondary" onclick="showScreen('home')">← 돌아가기</button>
+        </div>
+    </div>
+
+    <!-- 관리자 대시보드 -->
+    <div id="screen-admin-dashboard" class="screen">
+        <div class="content" style="padding-top:20px;">
+            <div class="admin-header">
+                <h2>👨‍💼 고객 관리</h2>
+                <button class="btn btn-primary btn-small" onclick="showModal('add-customer')">+ 고객 등록</button>
+            </div>
+
+            <div class="input-group" style="margin-bottom:15px;">
+                <input type="tel" id="admin-search" placeholder="🔍 전화번호로 검색..." oninput="searchCustomers()">
+            </div>
+
+            <div class="customer-list" id="admin-customer-list">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    불러오는 중...
+                </div>
+            </div>
+        </div>
+        <div class="bottom-nav">
+            <button class="nav-item active">
+                <div class="icon">👥</div>
+                <div class="text">고객</div>
+            </button>
+            <button class="nav-item" onclick="showModal('settings')">
+                <div class="icon">⚙️</div>
+                <div class="text">설정</div>
+            </button>
+            <button class="nav-item" onclick="adminLogout()">
+                <div class="icon">🚪</div>
+                <div class="text">로그아웃</div>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- 고객 등록 모달 -->
+<div id="modal-add-customer" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>👤 새 고객 등록</h3>
+            <button class="modal-close" onclick="hideModal('add-customer')">&times;</button>
+        </div>
+        <div class="input-group">
+            <label>이름</label>
+            <input type="text" id="new-customer-name" placeholder="홍길동">
+        </div>
+        <div class="input-group">
+            <label>전화번호</label>
+            <input type="tel" id="new-customer-phone" placeholder="010-1234-5678">
+        </div>
+        <div class="input-group">
+            <label>생일 (선택)</label>
+            <input type="date" id="new-customer-birthday">
+        </div>
+        <div class="input-group">
+            <label>초기 잔액</label>
+            <input type="number" id="new-customer-balance" placeholder="0" value="0">
+        </div>
+        <button class="btn btn-primary" onclick="addCustomer()">등록하기</button>
+    </div>
+</div>
+
+<!-- 고객 상세/충전/차감 모달 -->
+<div id="modal-customer-detail" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="detail-customer-name">고객 상세</h3>
+            <button class="modal-close" onclick="hideModal('customer-detail')">&times;</button>
+        </div>
+
+        <div class="balance-card" style="margin-bottom:20px;">
+            <div class="label">현재 잔액</div>
+            <div class="amount" id="detail-customer-balance">0원</div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('charge')">💰 충전</button>
+            <button class="tab" onclick="switchTab('use')">✂️ 사용</button>
+        </div>
+
+        <div id="tab-charge" class="tab-content">
+            <div class="quick-amounts">
+                <button class="quick-amount-btn" onclick="setAmount(50000)">5만원</button>
+                <button class="quick-amount-btn" onclick="setAmount(100000)">10만원</button>
+                <button class="quick-amount-btn" onclick="setAmount(200000)">20만원</button>
+                <button class="quick-amount-btn" onclick="setAmount(300000)">30만원</button>
+                <button class="quick-amount-btn" onclick="setAmount(500000)">50만원</button>
+                <button class="quick-amount-btn" onclick="setAmount(1000000)">100만원</button>
+            </div>
+            <div class="input-group">
+                <label>충전 금액</label>
+                <input type="number" id="charge-amount" placeholder="금액 입력">
+            </div>
+            <button class="btn btn-success" onclick="chargeBalance()">💰 충전하기</button>
+        </div>
+
+        <div id="tab-use" class="tab-content" style="display:none;">
+            <div class="input-group">
+                <label>서비스 선택</label>
+                <select id="service-select" onchange="updateServiceAmount()">
+                    <option value="">서비스 선택...</option>
+                    <option value="15000">주니어 컷 - 15,000원</option>
+                    <option value="18000">남성 컷 - 18,000원</option>
+                    <option value="21000">여성 컷 - 21,000원</option>
+                    <option value="70000">일반펌 - 70,000원</option>
+                    <option value="100000">열펌 - 100,000원</option>
+                    <option value="50000">뿌리염색 - 50,000원</option>
+                    <option value="70000">전체염색 - 70,000원</option>
+                    <option value="custom">직접 입력</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>차감 금액</label>
+                <input type="number" id="use-amount" placeholder="금액 입력">
+            </div>
+            <div class="input-group">
+                <label>메모 (선택)</label>
+                <input type="text" id="use-memo" placeholder="예: 어깨아래 추가">
+            </div>
+            <button class="btn btn-danger" onclick="useBalance()">✂️ 차감하기</button>
+        </div>
+    </div>
+</div>
+
+<!-- 설정 모달 -->
+<div id="modal-settings" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>⚙️ 설정</h3>
+            <button class="modal-close" onclick="hideModal('settings')">&times;</button>
+        </div>
+        <div class="input-group">
+            <label>매장 이름</label>
+            <input type="text" id="setting-salon-name" placeholder="OO미용실">
+        </div>
+        <div class="input-group">
+            <label>관리자 비밀번호 변경</label>
+            <input type="password" id="setting-new-password" placeholder="새 비밀번호">
+        </div>
+        <button class="btn btn-primary" onclick="saveSettings()">저장하기</button>
+    </div>
+</div>
+
+<script>
+    // Firebase 설정 - 나중에 실제 값으로 교체
+    const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_PROJECT.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT.appspot.com",
+        messagingSenderId: "YOUR_SENDER_ID",
+        appId: "YOUR_APP_ID"
+    };
+
+    // Firebase 초기화 (설정 후 주석 해제)
+    // firebase.initializeApp(firebaseConfig);
+    // const db = firebase.firestore();
+
+    // 임시 데이터 (Firebase 연결 전 테스트용)
+    let mockCustomers = [
+        { id: '1', name: '김민지', phone: '010-1234-5678', lastFour: '5678', balance: 150000, birthday: '1995-03-15', history: [
+            { date: '2026-02-20', type: 'use', amount: -21000, service: '여성 컷' },
+            { date: '2026-02-15', type: 'charge', amount: 100000, service: '충전' },
+            { date: '2026-02-10', type: 'use', amount: -70000, service: '전체염색' },
+        ]},
+        { id: '2', name: '이서준', phone: '010-9876-5432', lastFour: '5432', balance: 80000, birthday: '1990-07-22', history: [
+            { date: '2026-02-18', type: 'use', amount: -18000, service: '남성 컷' },
+            { date: '2026-02-01', type: 'charge', amount: 100000, service: '충전' },
+        ]},
+        { id: '3', name: '박지영', phone: '010-5555-1234', lastFour: '1234', balance: 250000, birthday: '1988-12-03', history: [
+            { date: '2026-02-19', type: 'charge', amount: 300000, service: '충전' },
+            { date: '2026-02-19', type: 'use', amount: -50000, service: '뿌리염색' },
+        ]},
+    ];
+
+    let currentCustomer = null;
+    let selectedCustomer = null;
+    const ADMIN_PASSWORD = '1234'; // 기본 비밀번호
+
+    // 화면 전환
+    function showScreen(screenId) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('screen-' + screenId).classList.add('active');
+
+        // 화면별 초기화
+        if (screenId === 'customer-login') {
+            document.getElementById('phone-last4').value = '';
+            document.getElementById('phone-last4').focus();
+        } else if (screenId === 'admin-login') {
+            document.getElementById('admin-password').value = '';
+            document.getElementById('admin-password').focus();
+        } else if (screenId === 'admin-dashboard') {
+            loadCustomerList();
+        }
+    }
+
+    // 고객 로그인
+    function customerLogin() {
+        const lastFour = document.getElementById('phone-last4').value;
+        const msgDiv = document.getElementById('customer-login-message');
+
+        if (lastFour.length !== 4) {
+            msgDiv.innerHTML = '<div class="message error">4자리 숫자를 입력하세요</div>';
+            return;
+        }
+
+        // 고객 찾기
+        const customer = mockCustomers.find(c => c.lastFour === lastFour);
+
+        if (!customer) {
+            msgDiv.innerHTML = '<div class="message error">등록되지 않은 번호입니다</div>';
+            return;
+        }
+
+        currentCustomer = customer;
+        displayCustomerBalance();
+        showScreen('customer-balance');
+    }
+
+    // 고객 잔액 표시
+    function displayCustomerBalance() {
+        document.getElementById('customer-balance').textContent = currentCustomer.balance.toLocaleString() + '원';
+        document.getElementById('customer-name-display').textContent = currentCustomer.name + ' 고객님';
+
+        // 쿠폰 체크 (생일)
+        const couponContainer = document.getElementById('coupon-container');
+        const today = new Date();
+        const birthday = new Date(currentCustomer.birthday);
+
+        if (today.getMonth() === birthday.getMonth()) {
+            couponContainer.innerHTML = `
+                <div class="coupon-card">
+                    <div class="coupon-title">🎂 생일 축하 쿠폰</div>
+                    <div class="coupon-desc">컷 서비스 50% 할인 (이번 달까지)</div>
+                </div>
+            `;
+        } else {
+            couponContainer.innerHTML = '';
+        }
+
+        // 이용 내역
+        const historyDiv = document.getElementById('customer-history');
+        if (currentCustomer.history && currentCustomer.history.length > 0) {
+            historyDiv.innerHTML = currentCustomer.history.map(h => `
+                <div class="history-item">
+                    <div class="info">
+                        <span class="service">${h.service}</span>
+                        <span class="date">${h.date}</span>
+                    </div>
+                    <span class="amount ${h.amount > 0 ? 'plus' : 'minus'}">
+                        ${h.amount > 0 ? '+' : ''}${h.amount.toLocaleString()}원
+                    </span>
+                </div>
+            `).join('');
+        } else {
+            historyDiv.innerHTML = '<div class="empty-state"><div class="icon">📝</div>이용 내역이 없습니다</div>';
+        }
+    }
+
+    // 고객 로그아웃
+    function customerLogout() {
+        currentCustomer = null;
+        showScreen('home');
+    }
+
+    // 관리자 로그인
+    function adminLogin() {
+        const password = document.getElementById('admin-password').value;
+        const msgDiv = document.getElementById('admin-login-message');
+
+        if (password === ADMIN_PASSWORD) {
+            showScreen('admin-dashboard');
+        } else {
+            msgDiv.innerHTML = '<div class="message error">비밀번호가 틀렸습니다</div>';
+        }
+    }
+
+    // 관리자 로그아웃
+    function adminLogout() {
+        showScreen('home');
+    }
+
+    // 고객 목록 로드
+    function loadCustomerList() {
+        const listDiv = document.getElementById('admin-customer-list');
+
+        if (mockCustomers.length === 0) {
+            listDiv.innerHTML = '<div class="empty-state"><div class="icon">👥</div>등록된 고객이 없습니다</div>';
+            return;
+        }
+
+        listDiv.innerHTML = mockCustomers.map(c => `
+            <div class="customer-item" onclick="openCustomerDetail('${c.id}')">
+                <div class="info">
+                    <h4>${c.name}</h4>
+                    <p>${c.phone}</p>
+                </div>
+                <div class="balance">${c.balance.toLocaleString()}원</div>
+            </div>
+        `).join('');
+    }
+
+    // 고객 검색
+    function searchCustomers() {
+        const query = document.getElementById('admin-search').value.replace(/-/g, '');
+        const listDiv = document.getElementById('admin-customer-list');
+
+        const filtered = mockCustomers.filter(c =>
+            c.phone.replace(/-/g, '').includes(query) || c.name.includes(query)
+        );
+
+        if (filtered.length === 0) {
+            listDiv.innerHTML = '<div class="empty-state"><div class="icon">🔍</div>검색 결과가 없습니다</div>';
+            return;
+        }
+
+        listDiv.innerHTML = filtered.map(c => `
+            <div class="customer-item" onclick="openCustomerDetail('${c.id}')">
+                <div class="info">
+                    <h4>${c.name}</h4>
+                    <p>${c.phone}</p>
+                </div>
+                <div class="balance">${c.balance.toLocaleString()}원</div>
+            </div>
+        `).join('');
+    }
+
+    // 모달 표시/숨김
+    function showModal(modalId) {
+        document.getElementById('modal-' + modalId).classList.add('active');
+    }
+
+    function hideModal(modalId) {
+        document.getElementById('modal-' + modalId).classList.remove('active');
+    }
+
+    // 고객 상세 열기
+    function openCustomerDetail(customerId) {
+        selectedCustomer = mockCustomers.find(c => c.id === customerId);
+        document.getElementById('detail-customer-name').textContent = selectedCustomer.name;
+        document.getElementById('detail-customer-balance').textContent = selectedCustomer.balance.toLocaleString() + '원';
+        document.getElementById('charge-amount').value = '';
+        document.getElementById('use-amount').value = '';
+        document.getElementById('service-select').value = '';
+        document.getElementById('use-memo').value = '';
+        showModal('customer-detail');
+    }
+
+    // 탭 전환
+    function switchTab(tabName) {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+
+        event.target.classList.add('active');
+        document.getElementById('tab-' + tabName).style.display = 'block';
+    }
+
+    // 빠른 금액 설정
+    function setAmount(amount) {
+        document.getElementById('charge-amount').value = amount;
+    }
+
+    // 서비스 금액 업데이트
+    function updateServiceAmount() {
+        const select = document.getElementById('service-select');
+        const amountInput = document.getElementById('use-amount');
+
+        if (select.value && select.value !== 'custom') {
+            amountInput.value = select.value;
+        } else {
+            amountInput.value = '';
+            amountInput.focus();
+        }
+    }
+
+    // 충전
+    function chargeBalance() {
+        const amount = parseInt(document.getElementById('charge-amount').value);
+
+        if (!amount || amount <= 0) {
+            alert('충전 금액을 입력하세요');
+            return;
+        }
+
+        selectedCustomer.balance += amount;
+        selectedCustomer.history.unshift({
+            date: new Date().toISOString().split('T')[0],
+            type: 'charge',
+            amount: amount,
+            service: '충전'
+        });
+
+        document.getElementById('detail-customer-balance').textContent = selectedCustomer.balance.toLocaleString() + '원';
+        loadCustomerList();
+
+        alert(`${amount.toLocaleString()}원이 충전되었습니다!`);
+        document.getElementById('charge-amount').value = '';
+    }
+
+    // 차감
+    function useBalance() {
+        const amount = parseInt(document.getElementById('use-amount').value);
+        const memo = document.getElementById('use-memo').value;
+        const serviceSelect = document.getElementById('service-select');
+        const serviceName = serviceSelect.options[serviceSelect.selectedIndex]?.text.split(' - ')[0] || memo || '서비스';
+
+        if (!amount || amount <= 0) {
+            alert('차감 금액을 입력하세요');
+            return;
+        }
+
+        if (selectedCustomer.balance < amount) {
+            alert('잔액이 부족합니다!');
+            return;
+        }
+
+        selectedCustomer.balance -= amount;
+        selectedCustomer.history.unshift({
+            date: new Date().toISOString().split('T')[0],
+            type: 'use',
+            amount: -amount,
+            service: serviceName
+        });
+
+        document.getElementById('detail-customer-balance').textContent = selectedCustomer.balance.toLocaleString() + '원';
+        loadCustomerList();
+
+        alert(`${amount.toLocaleString()}원이 차감되었습니다!`);
+        document.getElementById('use-amount').value = '';
+        document.getElementById('service-select').value = '';
+        document.getElementById('use-memo').value = '';
+    }
+
+    // 고객 등록
+    function addCustomer() {
+        const name = document.getElementById('new-customer-name').value.trim();
+        const phone = document.getElementById('new-customer-phone').value.trim();
+        const birthday = document.getElementById('new-customer-birthday').value;
+        const balance = parseInt(document.getElementById('new-customer-balance').value) || 0;
+
+        if (!name || !phone) {
+            alert('이름과 전화번호를 입력하세요');
+            return;
+        }
+
+        const lastFour = phone.replace(/-/g, '').slice(-4);
+
+        // 중복 체크
+        if (mockCustomers.some(c => c.lastFour === lastFour)) {
+            alert('이미 등록된 전화번호입니다');
+            return;
+        }
+
+        const newCustomer = {
+            id: Date.now().toString(),
+            name: name,
+            phone: phone,
+            lastFour: lastFour,
+            balance: balance,
+            birthday: birthday,
+            history: balance > 0 ? [{
+                date: new Date().toISOString().split('T')[0],
+                type: 'charge',
+                amount: balance,
+                service: '초기 충전'
+            }] : []
+        };
+
+        mockCustomers.unshift(newCustomer);
+        loadCustomerList();
+        hideModal('add-customer');
+
+        // 입력 초기화
+        document.getElementById('new-customer-name').value = '';
+        document.getElementById('new-customer-phone').value = '';
+        document.getElementById('new-customer-birthday').value = '';
+        document.getElementById('new-customer-balance').value = '0';
+
+        alert(`${name} 고객님이 등록되었습니다!`);
+    }
+
+    // 설정 저장
+    function saveSettings() {
+        const salonName = document.getElementById('setting-salon-name').value;
+        const newPassword = document.getElementById('setting-new-password').value;
+
+        if (salonName) {
+            localStorage.setItem('salonName', salonName);
+        }
+
+        if (newPassword) {
+            // 실제로는 Firebase에 저장
+            alert('비밀번호가 변경되었습니다');
+        }
+
+        hideModal('settings');
+        alert('설정이 저장되었습니다!');
+    }
+
+    // 페이지 로드 시
+    document.addEventListener('DOMContentLoaded', () => {
+        // 엔터키 이벤트
+        document.getElementById('phone-last4').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') customerLogin();
+        });
+        document.getElementById('admin-password').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') adminLogin();
+        });
+    });
+</script>
+
+</body>
+</html>
