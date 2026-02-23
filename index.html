@@ -967,6 +967,7 @@
         </div>
         <div class="footer">
             <div class="footer-links">
+                <a href="javascript:void(0)" onclick="showModal('about')">서비스 소개</a>
                 <a href="javascript:void(0)" onclick="showModal('privacy')">개인정보처리방침</a>
                 <a href="javascript:void(0)" onclick="showModal('terms')">이용약관</a>
             </div>
@@ -1106,6 +1107,7 @@
         </div>
         <div class="footer">
             <div class="footer-links">
+                <a href="javascript:void(0)" onclick="showModal('about')">서비스 소개</a>
                 <a href="javascript:void(0)" onclick="showModal('privacy')">개인정보처리방침</a>
                 <a href="javascript:void(0)" onclick="showModal('terms')">이용약관</a>
             </div>
@@ -1323,6 +1325,65 @@
         <h4 style="margin: 10px 0; color: #666;">🎉 이번 달 생일 고객</h4>
         <div class="customer-list" id="birthday-customer-list">
             <!-- 생일 고객 목록 -->
+        </div>
+    </div>
+</div>
+
+<!-- About 모달 -->
+<div id="modal-about" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>살롱페이 소개</h3>
+            <button class="modal-close" onclick="hideModal('about')">&times;</button>
+        </div>
+        <div class="policy-content">
+            <div style="text-align:center; margin-bottom:20px;">
+                <img src="logo.png" alt="살롱페이" style="width:80px; height:80px; object-fit:contain;">
+                <h2 style="margin-top:10px; color:#FF9F45;">살롱페이</h2>
+                <p style="color:#666;">미용실 선불 잔액 관리의 새로운 기준</p>
+            </div>
+
+            <h2>살롱페이란?</h2>
+            <p>살롱페이는 미용실과 고객 모두를 위한 <strong>스마트한 선불 잔액 관리 서비스</strong>입니다. 복잡한 종이 카드나 수기 장부 대신, 간편하고 정확한 디지털 잔액 관리로 더 나은 미용실 경험을 제공합니다.</p>
+
+            <h2>주요 기능</h2>
+            <ul>
+                <li><strong>간편한 잔액 조회:</strong> 이름과 전화번호 뒷자리만으로 언제 어디서나 잔액 확인</li>
+                <li><strong>투명한 이용 내역:</strong> 모든 충전과 사용 내역을 한눈에 확인</li>
+                <li><strong>생일 쿠폰:</strong> 특별한 날을 위한 생일 쿠폰 자동 발급</li>
+                <li><strong>AI 스타일 리마인더:</strong> 다음 방문 시기를 알려주는 스마트 알림</li>
+                <li><strong>서비스 가격표:</strong> 미용실 서비스와 가격을 쉽게 확인</li>
+            </ul>
+
+            <h2>고객을 위한 혜택</h2>
+            <ul>
+                <li>언제든 잔액 확인 가능</li>
+                <li>투명한 사용 내역 제공</li>
+                <li>생일 특별 할인 쿠폰</li>
+                <li>다음 방문 시기 리마인더</li>
+            </ul>
+
+            <h2>미용실을 위한 혜택</h2>
+            <ul>
+                <li>효율적인 고객 관리</li>
+                <li>선불 결제로 안정적인 매출</li>
+                <li>고객 재방문율 향상</li>
+                <li>생일 마케팅 자동화</li>
+            </ul>
+
+            <h2>헤어 뷰티 매거진</h2>
+            <p>살롱페이는 단순한 결제 서비스를 넘어, <strong>전문적인 헤어 케어 정보</strong>도 제공합니다. 펌/염색 후 관리법, 계절별 헤어 케어 팁, 최신 트렌드까지 - 건강하고 아름다운 머릿결을 위한 유용한 정보를 만나보세요.</p>
+
+            <h2>문의하기</h2>
+            <p>살롱페이에 대해 궁금한 점이 있으시면 언제든 연락해주세요.</p>
+            <ul>
+                <li><strong>이메일:</strong> support@salonpay.kr</li>
+                <li><strong>운영시간:</strong> 평일 09:00 - 18:00</li>
+            </ul>
+
+            <div style="background:#FFF8E7; padding:15px; border-radius:12px; margin-top:20px; text-align:center;">
+                <p style="margin:0; color:#FF9F45; font-weight:600;">살롱페이와 함께 더 스마트한 미용실 경험을 시작하세요!</p>
+            </div>
         </div>
     </div>
 </div>
@@ -1834,6 +1895,428 @@
                     <p>심하게 손상된 모발은 살롱에서 케라틴 트리트먼트나 클리닉을 받아보세요. 집에서 하기 어려운 깊은 영양 공급이 가능합니다!</p>
                 </div>
             `
+        },
+        {
+            id: 7,
+            category: '헤어 스타일',
+            title: '얼굴형별 어울리는 헤어스타일 완벽 가이드',
+            excerpt: '내 얼굴형에 맞는 헤어스타일을 찾고 계신가요? 전문 디자이너가 알려주는 얼굴형별 베스트 스타일!',
+            date: '2024.01.10',
+            readTime: '6분',
+            content: `
+                <p>같은 헤어스타일이라도 얼굴형에 따라 전혀 다르게 보일 수 있습니다. 내 얼굴형을 정확히 파악하고, 그에 맞는 스타일을 선택하면 훨씬 세련되고 예쁜 모습을 연출할 수 있어요.</p>
+
+                <h2>내 얼굴형 파악하기</h2>
+                <p>거울 앞에서 머리카락을 모두 뒤로 넘기고 얼굴 윤곽을 살펴보세요.</p>
+                <ul>
+                    <li><strong>둥근형:</strong> 얼굴 길이와 너비가 비슷, 턱선이 둥글다</li>
+                    <li><strong>긴형:</strong> 얼굴 길이가 너비보다 확연히 길다</li>
+                    <li><strong>각진형:</strong> 이마, 광대, 턱이 각지고 넓다</li>
+                    <li><strong>하트형:</strong> 이마가 넓고 턱이 뾰족하다</li>
+                    <li><strong>계란형:</strong> 이상적인 비율, 턱이 부드럽게 좁아짐</li>
+                </ul>
+
+                <h2>둥근 얼굴형</h2>
+                <h3>추천 스타일</h3>
+                <ul>
+                    <li>레이어드 컷으로 세로 라인 강조</li>
+                    <li>볼륨감 있는 정수리</li>
+                    <li>사이드 파팅 또는 6:4 가르마</li>
+                    <li>턱선 아래 기장</li>
+                </ul>
+                <h3>피해야 할 스타일</h3>
+                <ul>
+                    <li>단발 + 앞머리 (얼굴이 더 넓어 보임)</li>
+                    <li>가르마 없이 내린 앞머리</li>
+                    <li>귀 옆 볼륨</li>
+                </ul>
+
+                <h2>긴 얼굴형</h2>
+                <h3>추천 스타일</h3>
+                <ul>
+                    <li>옆으로 퍼지는 웨이브</li>
+                    <li>풍성한 앞머리로 이마 커버</li>
+                    <li>턱선~어깨 기장</li>
+                    <li>레이어 없는 원랭스 컷</li>
+                </ul>
+                <h3>피해야 할 스타일</h3>
+                <ul>
+                    <li>정수리 볼륨 (더 길어 보임)</li>
+                    <li>긴 생머리</li>
+                    <li>센터 가르마</li>
+                </ul>
+
+                <h2>각진 얼굴형</h2>
+                <h3>추천 스타일</h3>
+                <ul>
+                    <li>부드러운 웨이브나 컬</li>
+                    <li>턱선을 감싸는 레이어드</li>
+                    <li>사이드 앞머리</li>
+                    <li>쇄골~가슴 기장</li>
+                </ul>
+                <h3>피해야 할 스타일</h3>
+                <ul>
+                    <li>턱선에서 끝나는 단발</li>
+                    <li>일자 앞머리</li>
+                    <li>직선적인 컷</li>
+                </ul>
+
+                <div class="tip-box">
+                    <div class="tip-title">💡 Pro Tip</div>
+                    <p>각진 얼굴형은 부드러운 S컬 펌이 특히 잘 어울려요. 직선적인 라인을 피하고 곡선을 살려주세요!</p>
+                </div>
+
+                <h2>하트형 얼굴</h2>
+                <h3>추천 스타일</h3>
+                <ul>
+                    <li>턱선에 볼륨을 주는 스타일</li>
+                    <li>끝이 바깥으로 휘는 C컬</li>
+                    <li>사이드 파팅</li>
+                    <li>쇄골 기장의 레이어드</li>
+                </ul>
+                <h3>피해야 할 스타일</h3>
+                <ul>
+                    <li>정수리 볼륨 (이마가 더 넓어 보임)</li>
+                    <li>짧은 숏컷</li>
+                    <li>풍성한 앞머리</li>
+                </ul>
+
+                <h2>계란형 얼굴</h2>
+                <p>축하드려요! 계란형은 어떤 스타일이든 잘 어울리는 이상적인 얼굴형입니다. 자신의 취향과 라이프스타일에 맞는 스타일을 자유롭게 선택하세요.</p>
+
+                <div class="tip-box">
+                    <div class="tip-title">✨ 살롱 추천</div>
+                    <p>얼굴형 분석이 어려우시다면 살롱에서 전문 상담을 받아보세요. 디자이너가 직접 얼굴형을 분석하고 최적의 스타일을 추천해드립니다!</p>
+                </div>
+            `
+        },
+        {
+            id: 8,
+            category: '남성 헤어',
+            title: '남자 헤어스타일 가이드: 인기 스타일 & 관리법',
+            excerpt: '깔끔하고 세련된 남성 헤어스타일의 모든 것. 스타일 선택부터 유지 관리까지 알려드립니다.',
+            date: '2024.01.05',
+            readTime: '5분',
+            content: `
+                <p>남성 헤어스타일도 트렌드가 있고, 관리가 필요합니다. 얼굴형과 라이프스타일에 맞는 스타일을 찾고, 올바른 관리법으로 항상 깔끔한 모습을 유지하세요.</p>
+
+                <h2>2024 인기 남성 헤어스타일</h2>
+
+                <h3>1. 투블럭</h3>
+                <p>옆과 뒷머리를 짧게 밀고 윗머리에 볼륨을 살린 스타일. 가장 대중적이면서도 다양한 변형이 가능합니다.</p>
+                <ul>
+                    <li><strong>댄디 투블럭:</strong> 윗머리를 옆으로 넘긴 깔끔한 스타일</li>
+                    <li><strong>포마드 투블럭:</strong> 광택 있게 뒤로 넘긴 스타일</li>
+                    <li><strong>내추럴 투블럭:</strong> 자연스럽게 떨어뜨린 스타일</li>
+                </ul>
+
+                <h3>2. 리프컷</h3>
+                <p>앞머리에 가벼운 레이어를 넣어 자연스러운 결을 살린 스타일. 부드럽고 자연스러운 느낌을 원하는 분께 추천합니다.</p>
+
+                <h3>3. 가일컷</h3>
+                <p>옆과 뒷머리를 바싹 밀어 올린 클래식한 스타일. 군인 스타일에서 유래했지만 세련되게 변형되었습니다.</p>
+
+                <h3>4. 쉐도우펌</h3>
+                <p>자연스러운 볼륨과 결을 살린 펌 스타일. 스타일링 없이도 멋진 헤어를 연출할 수 있어 인기입니다.</p>
+
+                <div class="tip-box">
+                    <div class="tip-title">💡 얼굴형별 추천</div>
+                    <p>둥근 얼굴: 투블럭, 가일컷 / 긴 얼굴: 리프컷, 앞머리 있는 스타일 / 각진 얼굴: 소프트 투블럭, 쉐도우펌</p>
+                </div>
+
+                <h2>남성 헤어 관리 기본</h2>
+
+                <h3>올바른 샴푸법</h3>
+                <ol>
+                    <li>미온수로 두피와 모발을 충분히 적시기</li>
+                    <li>샴푸를 손에 덜어 거품 낸 후 두피에 적용</li>
+                    <li>손끝으로 두피를 마사지하듯 씻기</li>
+                    <li>충분히 헹구기 (샴푸 잔여물 주의)</li>
+                </ol>
+
+                <h3>스타일링 제품 선택</h3>
+                <ul>
+                    <li><strong>왁스:</strong> 매트한 질감, 자연스러운 스타일링</li>
+                    <li><strong>포마드:</strong> 윤기 있는 질감, 깔끔한 스타일</li>
+                    <li><strong>젤:</strong> 강한 고정력, 단정한 스타일</li>
+                    <li><strong>무스:</strong> 볼륨감, 펌 스타일에 적합</li>
+                </ul>
+
+                <h2>스타일 유지를 위한 커트 주기</h2>
+                <ul>
+                    <li><strong>투블럭:</strong> 3-4주마다 (옆/뒷머리 빨리 자람)</li>
+                    <li><strong>리프컷:</strong> 4-5주마다</li>
+                    <li><strong>가일컷:</strong> 2-3주마다</li>
+                </ul>
+
+                <h2>두피 관리도 중요!</h2>
+                <p>남성은 피지 분비가 활발해 두피 관리가 특히 중요합니다:</p>
+                <ul>
+                    <li>매일 샴푸로 두피 청결 유지</li>
+                    <li>주 1회 두피 스케일링</li>
+                    <li>모자 착용 후 두피 씻기</li>
+                    <li>스트레스 관리 (탈모 예방)</li>
+                </ul>
+
+                <div class="tip-box">
+                    <div class="tip-title">✨ 살롱 추천</div>
+                    <p>처음 새로운 스타일에 도전할 때는 살롱에서 전문 상담을 받아보세요. 얼굴형과 모질에 맞는 스타일을 추천받을 수 있습니다!</p>
+                </div>
+            `
+        },
+        {
+            id: 9,
+            category: '헤어 케어',
+            title: '여름철 헤어 케어: 자외선과 습기로부터 머리 보호하기',
+            excerpt: '뜨거운 햇볕과 높은 습도로 머리가 상하기 쉬운 여름! 건강한 머릿결을 지키는 방법을 알아보세요.',
+            date: '2023.12.28',
+            readTime: '4분',
+            content: `
+                <p>여름은 모발에게 가장 힘든 계절입니다. 강한 자외선, 높은 습도, 바닷물과 수영장 물까지... 다양한 요인이 머릿결을 손상시킵니다. 올바른 케어로 여름에도 건강한 머릿결을 유지하세요!</p>
+
+                <h2>여름철 모발 손상 원인</h2>
+                <ul>
+                    <li><strong>자외선:</strong> 모발 색상 변색, 단백질 손상, 건조함</li>
+                    <li><strong>습기:</strong> 곱슬거림, 부스스함, 스타일 무너짐</li>
+                    <li><strong>바닷물:</strong> 소금기로 인한 건조, 색상 탈색</li>
+                    <li><strong>수영장 물:</strong> 염소로 인한 손상, 변색</li>
+                    <li><strong>에어컨:</strong> 실내 건조로 인한 수분 손실</li>
+                </ul>
+
+                <h2>자외선 차단</h2>
+                <p>피부처럼 모발도 자외선 차단이 필요합니다:</p>
+                <ul>
+                    <li>UV 차단 헤어 스프레이 사용</li>
+                    <li>외출 시 모자 또는 스카프 착용</li>
+                    <li>한낮(11시-3시) 직사광선 피하기</li>
+                    <li>UV 차단 성분이 든 리브인 제품 사용</li>
+                </ul>
+
+                <div class="tip-box">
+                    <div class="tip-title">💡 Pro Tip</div>
+                    <p>염색한 모발은 자외선에 더 취약해요. 염색 후에는 UV 차단에 더욱 신경 쓰세요!</p>
+                </div>
+
+                <h2>습기 대응법</h2>
+                <p>높은 습도로 머리가 부스스해지는 것을 방지하려면:</p>
+                <ul>
+                    <li>안티프리즈(Anti-frizz) 제품 사용</li>
+                    <li>실리콘 세럼으로 코팅</li>
+                    <li>헤어 오일로 수분 증발 방지</li>
+                    <li>습기에 강한 스타일링 제품 선택</li>
+                </ul>
+
+                <h2>수영 전후 케어</h2>
+                <h3>수영 전</h3>
+                <ul>
+                    <li>깨끗한 물로 모발 적시기 (염소/소금물 흡수 방지)</li>
+                    <li>코코넛 오일이나 리브인 컨디셔너 바르기</li>
+                    <li>수영 캡 착용</li>
+                </ul>
+                <h3>수영 후</h3>
+                <ul>
+                    <li>즉시 깨끗한 물로 헹구기</li>
+                    <li>수영 전용 샴푸로 씻기</li>
+                    <li>딥 컨디셔닝 트리트먼트</li>
+                </ul>
+
+                <h2>여름철 샴푸 팁</h2>
+                <ul>
+                    <li>매일 샴푸하되, 순한 제품 사용</li>
+                    <li>시원한 물로 헹구기 (큐티클 닫힘)</li>
+                    <li>두피 각질 관리로 청결 유지</li>
+                    <li>주 2-3회 트리트먼트</li>
+                </ul>
+
+                <h2>에어컨 건조함 대응</h2>
+                <p>에어컨 바람으로 건조해진 모발 케어:</p>
+                <ul>
+                    <li>미스트 타입 에센스로 수시 보습</li>
+                    <li>실내 가습기 사용</li>
+                    <li>에어컨 바람 직접 맞지 않기</li>
+                </ul>
+
+                <div class="tip-box">
+                    <div class="tip-title">✨ 살롱 추천</div>
+                    <p>여름이 끝난 후 손상된 모발을 위한 집중 클리닉을 받아보세요. 여름 동안 쌓인 손상을 한 번에 케어할 수 있습니다!</p>
+                </div>
+            `
+        },
+        {
+            id: 10,
+            category: '헤어 상식',
+            title: '탈모 예방을 위한 생활 습관 10가지',
+            excerpt: '탈모는 예방이 최선입니다. 일상에서 실천할 수 있는 탈모 예방 습관을 알아보세요.',
+            date: '2023.12.20',
+            readTime: '5분',
+            content: `
+                <p>탈모는 유전적 요인뿐만 아니라 생활 습관과도 밀접한 관련이 있습니다. 올바른 생활 습관으로 탈모를 예방하고 건강한 모발을 유지하세요.</p>
+
+                <h2>1. 올바른 샴푸 습관</h2>
+                <p>두피 건강이 모발 건강의 기본입니다:</p>
+                <ul>
+                    <li>미온수 사용 (뜨거운 물 X)</li>
+                    <li>손톱이 아닌 손끝으로 마사지</li>
+                    <li>샴푸 잔여물 완벽히 헹구기</li>
+                    <li>두피 타입에 맞는 샴푸 선택</li>
+                </ul>
+
+                <h2>2. 두피 완전 건조</h2>
+                <p>젖은 두피는 세균 번식의 온상입니다. 샴푸 후 두피까지 완전히 말려주세요. 자연건조보다는 드라이어의 시원한 바람으로 두피를 건조시키는 것이 좋습니다.</p>
+
+                <h2>3. 두피 마사지</h2>
+                <p>하루 5분 두피 마사지는 혈액순환을 촉진하여 모근에 영양 공급을 돕습니다:</p>
+                <ul>
+                    <li>손끝으로 두피 전체를 가볍게 두드리기</li>
+                    <li>원을 그리며 마사지</li>
+                    <li>목 뒤부터 정수리 방향으로</li>
+                </ul>
+
+                <div class="tip-box">
+                    <div class="tip-title">💡 Pro Tip</div>
+                    <p>샴푸 시간을 활용해 두피 마사지를 하면 일석이조! 2-3분간 마사지하며 샴푸하세요.</p>
+                </div>
+
+                <h2>4. 균형 잡힌 식단</h2>
+                <p>모발에 좋은 영양소를 충분히 섭취하세요:</p>
+                <ul>
+                    <li><strong>단백질:</strong> 달걀, 생선, 콩류, 닭가슴살</li>
+                    <li><strong>철분:</strong> 시금치, 소고기, 굴</li>
+                    <li><strong>아연:</strong> 견과류, 호박씨, 굴</li>
+                    <li><strong>비오틴:</strong> 달걀 노른자, 아보카도</li>
+                    <li><strong>오메가3:</strong> 연어, 고등어, 호두</li>
+                </ul>
+
+                <h2>5. 충분한 수면</h2>
+                <p>수면 중에 성장 호르몬이 분비되어 모발 성장을 촉진합니다. 하루 7-8시간 충분한 수면을 취하세요. 특히 밤 10시~새벽 2시 사이의 수면이 중요합니다.</p>
+
+                <h2>6. 스트레스 관리</h2>
+                <p>스트레스는 탈모의 주요 원인 중 하나입니다:</p>
+                <ul>
+                    <li>규칙적인 운동</li>
+                    <li>명상이나 요가</li>
+                    <li>취미 활동</li>
+                    <li>충분한 휴식</li>
+                </ul>
+
+                <h2>7. 금연</h2>
+                <p>흡연은 두피 혈액순환을 저해하고 모근에 가는 영양 공급을 방해합니다. 탈모가 걱정된다면 금연을 강력히 권장합니다.</p>
+
+                <h2>8. 과도한 음주 피하기</h2>
+                <p>알코올은 모발에 필요한 영양소의 흡수를 방해합니다. 적당한 음주를 유지하세요.</p>
+
+                <h2>9. 모자 착용 주의</h2>
+                <ul>
+                    <li>꽉 조이는 모자 피하기</li>
+                    <li>통풍이 되는 모자 선택</li>
+                    <li>모자 착용 후 두피 씻기</li>
+                    <li>장시간 착용 피하기</li>
+                </ul>
+
+                <h2>10. 머리 스타일링 주의</h2>
+                <ul>
+                    <li>머리 세게 묶지 않기</li>
+                    <li>같은 위치에 헤어핀 꽂지 않기</li>
+                    <li>열 스타일링 줄이기</li>
+                    <li>화학 시술 간격 충분히 두기</li>
+                </ul>
+
+                <div class="tip-box">
+                    <div class="tip-title">✨ 살롱 추천</div>
+                    <p>탈모가 걱정된다면 정기적인 두피 스케일링을 받아보세요. 두피 환경을 개선하고 탈모 예방에 도움이 됩니다!</p>
+                </div>
+            `
+        },
+        {
+            id: 11,
+            category: '펌 스타일',
+            title: '펌 종류 총정리: 내게 맞는 펌 찾기',
+            excerpt: 'C컬, S컬, 히피펌, 빌드펌... 다양한 펌 종류와 특징을 한눈에 알아보세요.',
+            date: '2023.12.15',
+            readTime: '5분',
+            content: `
+                <p>펌을 하고 싶은데 어떤 펌을 해야 할지 모르겠다면? 다양한 펌 종류와 각각의 특징을 알아보고 나에게 맞는 펌을 찾아보세요!</p>
+
+                <h2>펌의 종류</h2>
+
+                <h3>1. C컬 펌</h3>
+                <p>모발 끝을 안쪽이나 바깥쪽으로 자연스럽게 말아주는 펌입니다.</p>
+                <ul>
+                    <li><strong>특징:</strong> 자연스러움, 관리 쉬움</li>
+                    <li><strong>추천 대상:</strong> 펌 처음 하시는 분, 자연스러운 스타일 원하시는 분</li>
+                    <li><strong>유지 기간:</strong> 2-3개월</li>
+                    <li><strong>스타일링:</strong> 거의 필요 없음</li>
+                </ul>
+
+                <h3>2. S컬 펌</h3>
+                <p>S자 모양의 웨이브를 만드는 펌입니다. C컬보다 볼륨감이 있습니다.</p>
+                <ul>
+                    <li><strong>특징:</strong> 볼륨감, 화려함</li>
+                    <li><strong>추천 대상:</strong> 볼륨 원하시는 분, 여성스러운 스타일 원하시는 분</li>
+                    <li><strong>유지 기간:</strong> 3-4개월</li>
+                    <li><strong>스타일링:</strong> 약간 필요</li>
+                </ul>
+
+                <h3>3. 히피펌</h3>
+                <p>굵고 큰 웨이브가 특징인 복고풍 펌입니다.</p>
+                <ul>
+                    <li><strong>특징:</strong> 레트로 감성, 볼륨감</li>
+                    <li><strong>추천 대상:</strong> 개성 있는 스타일 원하시는 분, 긴 머리</li>
+                    <li><strong>유지 기간:</strong> 4-5개월</li>
+                    <li><strong>스타일링:</strong> 무스나 젤로 웨이브 살리기</li>
+                </ul>
+
+                <div class="tip-box">
+                    <div class="tip-title">💡 Pro Tip</div>
+                    <p>히피펌은 모발이 어느 정도 길어야 예쁘게 나와요. 최소 쇄골 아래 기장을 추천합니다!</p>
+                </div>
+
+                <h3>4. 빌드펌</h3>
+                <p>자연스러운 볼륨과 결을 살려주는 펌입니다. 스타일링 없이도 예쁜 머리를 연출할 수 있어요.</p>
+                <ul>
+                    <li><strong>특징:</strong> 자연스러운 볼륨, 결 살림</li>
+                    <li><strong>추천 대상:</strong> 가는 모발, 볼륨 없는 분</li>
+                    <li><strong>유지 기간:</strong> 2-3개월</li>
+                    <li><strong>스타일링:</strong> 거의 필요 없음</li>
+                </ul>
+
+                <h3>5. 물결펌</h3>
+                <p>자연스럽게 흐르는 물결 모양의 웨이브입니다.</p>
+                <ul>
+                    <li><strong>특징:</strong> 부드러움, 여성스러움</li>
+                    <li><strong>추천 대상:</strong> 자연스러운 웨이브 원하시는 분</li>
+                    <li><strong>유지 기간:</strong> 3-4개월</li>
+                </ul>
+
+                <h3>6. 애즈펌 (남성)</h3>
+                <p>남성용 자연스러운 볼륨 펌입니다.</p>
+                <ul>
+                    <li><strong>특징:</strong> 자연스러운 볼륨, 스타일링 편함</li>
+                    <li><strong>추천 대상:</strong> 남성, 자연스러운 스타일 원하시는 분</li>
+                    <li><strong>유지 기간:</strong> 2-3개월</li>
+                </ul>
+
+                <h2>펌 선택 시 고려사항</h2>
+                <ul>
+                    <li><strong>모발 상태:</strong> 손상이 심하면 펌 전 트리트먼트 필수</li>
+                    <li><strong>얼굴형:</strong> 둥근 얼굴은 볼륨 적게, 긴 얼굴은 옆 볼륨 추천</li>
+                    <li><strong>모발 길이:</strong> 펌 종류에 따라 최소 길이 필요</li>
+                    <li><strong>라이프스타일:</strong> 스타일링 시간 고려</li>
+                </ul>
+
+                <h2>펌 후 관리 필수템</h2>
+                <ul>
+                    <li>펌 전용 샴푸 & 컨디셔너</li>
+                    <li>헤어 에센스 또는 오일</li>
+                    <li>디퓨저 (드라이어 부착)</li>
+                    <li>컬 크림 또는 무스</li>
+                </ul>
+
+                <div class="tip-box">
+                    <div class="tip-title">✨ 살롱 추천</div>
+                    <p>펌은 모질과 얼굴형에 따라 결과가 크게 달라져요. 전문 디자이너와 상담 후 나에게 맞는 펌을 선택하세요!</p>
+                </div>
+            `
         }
     ];
 
@@ -1850,16 +2333,16 @@
 
     // 임시 데이터 (Firebase 연결 전 테스트용)
     let mockCustomers = [
-        { id: '1', name: '김민지(테스트)', phone: '010-1234-5678', lastFour: '5678', balance: 150000, birthday: '1995-03-15', birthdayCoupon: null, history: [
+        { id: '1', name: '김민지', phone: '010-1234-5678', lastFour: '5678', balance: 150000, birthday: '1995-03-15', birthdayCoupon: null, history: [
             { date: '2026-02-20', type: 'use', amount: -21000, service: '여성 컷' },
             { date: '2026-02-15', type: 'charge', amount: 100000, service: '충전' },
             { date: '2026-02-10', type: 'use', amount: -70000, service: '전체염색' },
         ]},
-        { id: '2', name: '이서준(테스트)', phone: '010-9876-5432', lastFour: '5432', balance: 82000, birthday: '1990-07-22', birthdayCoupon: null, history: [
+        { id: '2', name: '이서준', phone: '010-9876-5432', lastFour: '5432', balance: 82000, birthday: '1990-07-22', birthdayCoupon: null, history: [
             { date: '2026-02-18', type: 'use', amount: -18000, service: '남성 컷' },
             { date: '2026-02-01', type: 'charge', amount: 100000, service: '충전' },
         ]},
-        { id: '3', name: '박지영(테스트)', phone: '010-5555-1234', lastFour: '1234', balance: 250000, birthday: '1988-02-03', birthdayCoupon: 'active', history: [
+        { id: '3', name: '박지영', phone: '010-5555-1234', lastFour: '1234', balance: 250000, birthday: '1988-02-03', birthdayCoupon: 'active', history: [
             { date: '2026-02-19', type: 'charge', amount: 300000, service: '충전' },
             { date: '2026-02-19', type: 'use', amount: -50000, service: '뿌리염색' },
         ]},
