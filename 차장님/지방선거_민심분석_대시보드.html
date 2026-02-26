@@ -143,22 +143,22 @@
             position: relative;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
-            gap: 25px;
+            align-items: center;
+            gap: 20px;
             margin-bottom: 40px;
         }
 
         .left-cards, .right-cards {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            width: 320px;
+            gap: 6px;
+            width: 380px;
         }
 
         .map-container {
             position: relative;
-            width: 550px;
-            min-height: 750px;
+            width: 825px;
+            min-height: 1125px;
             flex-shrink: 0;
             background: transparent;
             display: flex;
@@ -171,144 +171,77 @@
             height: auto;
         }
 
-        /* Region Card - 새로운 디자인 */
+        /* Region Card - 알약형 + 정당색 테두리 */
         .region-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            background: #ffffff;
+            border-radius: 50px;
+            padding: 10px 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
+            transition: all 0.2s ease;
+            border: 2px solid #e0e0e0;
         }
 
-        .region-card::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
+        .region-card.ppp {
+            border-color: #E57373;
         }
 
-        .region-card.ppp::before {
-            background: var(--ppp-gradient);
-        }
-
-        .region-card.dem::before {
-            background: var(--dem-gradient);
+        .region-card.dem {
+            border-color: #64B5F6;
         }
 
         .region-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
         }
 
-        .region-card.ppp:hover {
-            border-color: var(--ppp-light);
-        }
-
-        .region-card.dem:hover {
-            border-color: var(--dem-light);
-        }
-
-        /* 단체장 사진 */
-        .governor-photo {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #fff;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        /* 로고 - 2배 크기 */
+        .card-logo-area {
+            width: 240px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             flex-shrink: 0;
         }
 
-        .region-card.ppp .governor-photo {
-            border-color: var(--ppp-light);
-        }
-
-        .region-card.dem .governor-photo {
-            border-color: var(--dem-light);
-        }
-
-        /* 지역 정보 영역 */
-        .region-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .region-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 4px;
-        }
-
-        .region-logo {
-            height: 20px;
-            width: auto;
+        .region-logo-big {
+            max-width: 100%;
+            max-height: 100%;
             object-fit: contain;
         }
 
-        .region-name {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--text-dark);
+        /* 단체장명 + 수치 */
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .governor-name {
-            font-size: 12px;
-            color: var(--text-mid);
-            font-weight: 500;
-            margin-bottom: 4px;
-        }
-
-        .region-slogan {
+        .card-governor {
             font-size: 11px;
-            color: #fff;
-            font-weight: 600;
-            padding: 3px 8px;
-            border-radius: 10px;
-            display: inline-block;
-            max-width: 100%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            color: #86868b;
+            font-weight: 500;
         }
 
-        .region-card.ppp .region-slogan {
-            background: var(--ppp-gradient);
+        .card-score {
+            font-size: 13px;
+            font-weight: 700;
         }
 
-        .region-card.dem .region-slogan {
-            background: var(--dem-gradient);
+        .card-score.up {
+            color: #FF3B30;
         }
 
-        /* 점수 영역 */
-        .region-scores {
-            text-align: right;
-            flex-shrink: 0;
+        .card-score.down {
+            color: #007AFF;
         }
 
-        .net-score {
-            font-size: 24px;
-            font-weight: 800;
-            line-height: 1;
-        }
-
-        .net-score.positive { color: var(--positive); }
-        .net-score.negative { color: var(--negative); }
-        .net-score.warning { color: #FF9800; }
-
-        .score-detail {
-            font-size: 10px;
-            color: var(--text-light);
-            margin-top: 4px;
+        .card-score.same {
+            color: #86868b;
         }
 
         .score-bar {
@@ -556,28 +489,121 @@
             font-weight: 800;
         }
 
+        .modal-stats-mini {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 20px;
+            padding: 12px 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .modal-stat-mini {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-stat-mini .label {
+            font-size: 13px;
+            color: var(--text-mid);
+        }
+
+        .modal-stat-mini .value {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
         .modal-charts {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 24px;
+            gap: 20px;
         }
 
-        .chart-box {
+        .modal-charts.three-charts {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .modal-analysis-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .chart-box, .analysis-box {
             background: #f8f9fa;
             border-radius: 16px;
-            padding: 20px;
+            padding: 16px;
+        }
+
+        .analysis-title {
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+
+        .analysis-content {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .analysis-item {
+            background: #fff;
+            border-radius: 12px;
+            padding: 12px;
+            border-left: 4px solid #ddd;
+        }
+
+        .analysis-item.support {
+            border-left-color: #3B82F6;
+        }
+
+        .analysis-item.oppose {
+            border-left-color: #EF4444;
+        }
+
+        .analysis-item-label {
+            font-size: 11px;
+            color: var(--text-mid);
+            margin-bottom: 4px;
+        }
+
+        .analysis-item-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .analysis-item-score {
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .analysis-item.support .analysis-item-score {
+            color: #3B82F6;
+        }
+
+        .analysis-item.oppose .analysis-item-score {
+            color: #EF4444;
         }
 
         .chart-title {
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 600;
             text-align: center;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             color: var(--text-dark);
         }
 
         .chart-container {
-            height: 220px;
+            height: 200px;
             position: relative;
         }
 
@@ -618,6 +644,209 @@
             color: var(--text-light);
         }
 
+        /* 변화 뱃지 - 상승 빨강, 하락 파랑 파스텔 */
+        .change-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 12px;
+            margin-top: 4px;
+        }
+
+        .change-badge.up {
+            background: #FFCDD2;
+            color: #C62828;
+        }
+
+        .change-badge.down {
+            background: #BBDEFB;
+            color: #1565C0;
+        }
+
+        .change-badge.same {
+            background: #E0E0E0;
+            color: #616161;
+        }
+
+        /* 슬로프 차트 섹션 */
+        .slope-section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            margin-bottom: 40px;
+        }
+
+        .slope-chart-container {
+            position: relative;
+            height: 600px;
+            margin: 20px 0;
+        }
+
+        .slope-chart {
+            display: flex;
+            height: 100%;
+        }
+
+        .slope-axis {
+            width: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px 0;
+        }
+
+        .slope-axis.right {
+            text-align: right;
+        }
+
+        .slope-axis-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .slope-axis-item:hover {
+            background: #f0f0f0;
+        }
+
+        .slope-axis.right .slope-axis-item {
+            flex-direction: row-reverse;
+        }
+
+        .slope-score {
+            font-weight: 800;
+            font-size: 14px;
+            min-width: 40px;
+        }
+
+        .slope-score.positive { color: var(--positive); }
+        .slope-score.negative { color: var(--negative); }
+
+        .slope-region {
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .slope-lines {
+            flex: 1;
+            position: relative;
+        }
+
+        .slope-line {
+            position: absolute;
+            height: 3px;
+            transform-origin: left center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .slope-line:hover {
+            height: 5px;
+            filter: brightness(1.1);
+        }
+
+        .slope-line.up { background: linear-gradient(90deg, #66BB6A, #43A047); }
+        .slope-line.down { background: linear-gradient(90deg, #EF5350, #E53935); }
+        .slope-line.same { background: linear-gradient(90deg, #9E9E9E, #757575); }
+        .slope-line.severe { background: linear-gradient(90deg, #B71C1C, #D32F2F); }
+
+        .slope-legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .slope-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .slope-legend-line {
+            width: 30px;
+            height: 4px;
+            border-radius: 2px;
+        }
+
+        .slope-legend-line.up { background: #4CAF50; }
+        .slope-legend-line.down { background: #F44336; }
+        .slope-legend-line.severe { background: #B71C1C; }
+
+        /* 모달 탭 */
+        .modal-tabs {
+            display: flex;
+            gap: 4px;
+            background: #f0f0f0;
+            padding: 4px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .modal-tab {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            background: transparent;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text-mid);
+        }
+
+        .modal-tab.active {
+            background: var(--card-bg);
+            color: var(--text-dark);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .modal-tab:hover:not(.active) {
+            color: var(--text-dark);
+        }
+
+        .modal-change-summary {
+            background: linear-gradient(135deg, #f5f7fa, #e8ecef);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .modal-change-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .modal-change-arrow .from { color: var(--text-mid); }
+        .modal-change-arrow .arrow { font-size: 24px; }
+        .modal-change-arrow .to.positive { color: var(--positive); }
+        .modal-change-arrow .to.negative { color: var(--negative); }
+
+        .modal-change-delta {
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .modal-change-delta.up { color: #C62828; }
+        .modal-change-delta.down { color: #1565C0; }
+
         /* Responsive */
         @media (max-width: 1500px) {
             .map-section {
@@ -629,9 +858,10 @@
                 flex-wrap: wrap;
                 width: 100%;
                 justify-content: center;
+                gap: 8px;
             }
             .region-card {
-                width: 320px;
+                width: 360px;
             }
         }
 
@@ -641,6 +871,9 @@
             .region-card { width: 100%; }
             .modal-stats { grid-template-columns: repeat(2, 1fr); }
             .modal-charts { grid-template-columns: 1fr; }
+            .modal-charts.three-charts { grid-template-columns: 1fr; }
+            .modal-analysis-row { grid-template-columns: 1fr; }
+            .modal-stats-mini { flex-direction: column; gap: 8px; text-align: center; }
         }
     </style>
 </head>
@@ -651,8 +884,8 @@
             <h1>2026 지방선거 민심 분석</h1>
             <p class="subtitle">민선 8기 광역단체장 직무수행 평가 현황</p>
             <div class="meta">
-                <span>조사기간: 2025년 1월~6월 (1분기)</span>
-                <span>응답자: 17,707명</span>
+                <span>조사기간: 2025년 1~6월(상반기) vs 7~12월(하반기)</span>
+                <span>변화 추이 분석</span>
                 <span>출처: 한국갤럽</span>
             </div>
             <div class="net-score-note">
@@ -664,19 +897,19 @@
         <div class="summary-row">
             <div class="summary-stat">
                 <div class="label">국민의힘</div>
-                <div class="value ppp">11곳</div>
+                <div class="value ppp">10</div>
             </div>
             <div class="summary-stat">
                 <div class="label">더불어민주당</div>
-                <div class="value dem">6곳</div>
+                <div class="value dem">6</div>
             </div>
             <div class="summary-stat">
                 <div class="label">부정 우세</div>
-                <div class="value negative">3곳</div>
+                <div class="value negative">6</div>
             </div>
             <div class="summary-stat">
                 <div class="label">평균 Net Score</div>
-                <div class="value positive">+13</div>
+                <div class="value positive">+3</div>
             </div>
         </div>
 
@@ -711,7 +944,7 @@
 
         <!-- Footer -->
         <footer class="footer">
-            <p>본 자료는 한국갤럽조사연구소의 2025년 상반기 조사 결과를 기반으로 제작되었습니다.</p>
+            <p>본 자료는 한국갤럽조사연구소의 2025년 상반기(1~6월) 및 하반기(7~12월) 조사 결과를 기반으로 제작되었습니다.</p>
         </footer>
     </div>
 
@@ -736,178 +969,294 @@
         // 정치성향별 색상
         const orientColors = ['#FF6B6B', '#A0A0A0', '#4DABF7'];
 
-        // 2025년 1분기 갤럽 데이터
+        // 지자체 로고 이미지 매핑 (사진 폴더)
+        const regionLogoMap = {
+            'jeonnam': '사진/전라남도.png',
+            'gyeonggi': '사진/경기도.png',
+            'ulsan': '사진/울산광역시.png',
+            'incheon': '사진/인천광역시.png',
+            'gyeongbuk': '사진/경상북도.png',
+            'chungnam': '사진/충청남도.png',
+            'gyeongnam': '사진/경상남도.png',
+            'jeonbuk': '사진/전북.png',
+            'gangwon': '사진/강원도.png',
+            'busan': '사진/부산광역시.png',
+            'jeju': '사진/제주도.png',
+            'seoul': '사진/서울시.png',
+            'daejeon': '사진/대전광역시.png',
+            'daegu': '사진/대구광역시.png',
+            'gwangju': '사진/광주광역시.png',
+            'sejong': '사진/세종.png',
+            'chungbuk': '사진/충청북도.png'
+        };
+
+        // 2025년 상반기(1~6월) vs 하반기(7~12월) 갤럽 데이터
         const regionData = [
             {
                 id: 'jeonnam', name: '전라남도', governor: '김영록', party: 'dem',
-                positive: 63, negative: 19, netScore: 44,
                 logo: 'governor_photos/jeonnam.png',
                 governorPhoto: 'governor_photos/jeonnam_김영록.png',
-                sample: 640,
                 slogan: '으뜸 전남',
-                ages: { '20대': 29, '30대': 30, '40대': 34, '50대': 45, '60대': 44, '70+': 66 },
-                orientation: { '보수': 32, '중도': 35, '진보': 55 }
-            },
-            {
-                id: 'gyeongbuk', name: '경상북도', governor: '이철우', party: 'ppp',
-                positive: 55, negative: 29, netScore: 26,
-                logo: 'governor_photos/gyeongbuk.png',
-                governorPhoto: 'governor_photos/gyeongbuk_이철우.png',
-                sample: 847,
-                slogan: '새바람 행복북도',
-                ages: { '20대': 18, '30대': 7, '40대': 7, '50대': 22, '60대': 35, '70+': 51 },
-                orientation: { '보수': 50, '중도': 15, '진보': -18 }
+                q1: {
+                    positive: 63, negative: 19, netScore: 44, sample: 640,
+                    ages: { '20대': 29, '30대': 30, '40대': 34, '50대': 45, '60대': 44, '70+': 66 },
+                    orientation: { '보수': 32, '중도': 35, '진보': 55 }
+                },
+                q2: {
+                    positive: 52, negative: 26, netScore: 26, sample: 753,
+                    ages: { '20대': 26, '30대': 10, '40대': 5, '50대': 6, '60대': 37, '70+': 58 },
+                    orientation: { '보수': 8, '중도': 26, '진보': 25 }
+                }
             },
             {
                 id: 'gyeonggi', name: '경기도', governor: '김동연', party: 'dem',
-                positive: 53, negative: 28, netScore: 25,
                 logo: 'governor_photos/gyeonggi.png',
                 governorPhoto: 'governor_photos/gyeonggi_김동연.png',
-                sample: 4772,
                 slogan: '공정한 세상, 경기도',
-                ages: { '20대': 36, '30대': 15, '40대': 20, '50대': 27, '60대': 25, '70+': 29 },
-                orientation: { '보수': 2, '중도': 31, '진보': 45 }
-            },
-            {
-                id: 'jeonbuk', name: '전북특별자치도', governor: '김관영', party: 'dem',
-                positive: 50, negative: 30, netScore: 20,
-                logo: 'governor_photos/jeonbuk.png',
-                governorPhoto: 'governor_photos/jeonbuk_김관영.png',
-                sample: 622,
-                slogan: '천만 전북시대',
-                ages: { '20대': -6, '30대': -6, '40대': 25, '50대': 11, '60대': 32, '70+': 46 },
-                orientation: { '보수': 1, '중도': 12, '진보': 31 }
-            },
-            {
-                id: 'gwangju', name: '광주광역시', governor: '강기정', party: 'dem',
-                positive: 52, negative: 33, netScore: 19,
-                logo: 'governor_photos/gwangju.png',
-                governorPhoto: 'governor_photos/gwangju_강기정.png',
-                sample: 470,
-                slogan: '정의로운 광주',
-                ages: { '20대': 15, '30대': 11, '40대': 9, '50대': 19, '60대': 22, '70+': 37 },
-                orientation: { '보수': -14, '중도': 7, '진보': 35 }
-            },
-            {
-                id: 'chungnam', name: '충청남도', governor: '김태흠', party: 'ppp',
-                positive: 49, negative: 31, netScore: 18,
-                logo: 'governor_photos/chungnam.png',
-                governorPhoto: 'governor_photos/chungnam_김태흠.png',
-                sample: 740,
-                slogan: '따뜻한 충남',
-                ages: { '20대': 25, '30대': 17, '40대': -16, '50대': 2, '60대': 27, '70+': 53 },
-                orientation: { '보수': 44, '중도': 16, '진보': -21 }
-            },
-            {
-                id: 'incheon', name: '인천광역시', governor: '유정복', party: 'ppp',
-                positive: 50, negative: 33, netScore: 17,
-                logo: 'governor_photos/incheon.png',
-                governorPhoto: 'governor_photos/incheon_유정복.png',
-                sample: 1026,
-                slogan: '기회의 도시 인천',
-                ages: { '20대': 29, '30대': 8, '40대': -6, '50대': -2, '60대': 38, '70+': 47 },
-                orientation: { '보수': 40, '중도': 17, '진보': -10 }
-            },
-            {
-                id: 'gyeongnam', name: '경상남도', governor: '박완수', party: 'ppp',
-                positive: 48, negative: 31, netScore: 17,
-                logo: 'governor_photos/gyeongnam.png',
-                governorPhoto: 'governor_photos/gyeongnam_박완수.png',
-                sample: 1047,
-                slogan: '다시 뛰는 경남',
-                ages: { '20대': 26, '30대': 11, '40대': -11, '50대': 3, '60대': 29, '70+': 52 },
-                orientation: { '보수': 48, '중도': 11, '진보': -25 }
+                q1: {
+                    positive: 53, negative: 28, netScore: 25, sample: 4772,
+                    ages: { '20대': 36, '30대': 15, '40대': 20, '50대': 27, '60대': 25, '70+': 29 },
+                    orientation: { '보수': 2, '중도': 31, '진보': 45 }
+                },
+                q2: {
+                    positive: 50, negative: 25, netScore: 25, sample: 5343,
+                    ages: { '20대': 33, '30대': 14, '40대': 18, '50대': 26, '60대': 24, '70+': 41 },
+                    orientation: { '보수': 5, '중도': 30, '진보': 42 }
+                }
             },
             {
                 id: 'ulsan', name: '울산광역시', governor: '김두겸', party: 'ppp',
-                positive: 50, negative: 37, netScore: 13,
                 logo: 'governor_photos/ulsan.png',
                 governorPhoto: 'governor_photos/ulsan_김두겸.png',
-                sample: 364,
                 slogan: '울산이 다시 뜁니다',
-                ages: { '20대': 8, '30대': -2, '40대': -4, '50대': 7, '60대': 15, '70+': 73 },
-                orientation: { '보수': 31, '중도': 19, '진보': -23 }
+                q1: {
+                    positive: 50, negative: 37, netScore: 13, sample: 364,
+                    ages: { '20대': 8, '30대': -2, '40대': -4, '50대': 7, '60대': 15, '70+': 73 },
+                    orientation: { '보수': 31, '중도': 19, '진보': -23 }
+                },
+                q2: {
+                    positive: 49, negative: 31, netScore: 18, sample: 432,
+                    ages: { '20대': 14, '30대': 11, '40대': -22, '50대': 21, '60대': 31, '70+': 69 },
+                    orientation: { '보수': 34, '중도': 21, '진보': -10 }
+                }
             },
             {
-                id: 'daegu', name: '대구광역시', governor: '홍준표', party: 'ppp',
-                positive: 49, negative: 39, netScore: 10,
-                note: '4월 사퇴',
-                logo: 'governor_photos/daegu.png',
-                governorPhoto: 'governor_photos/daegu_홍준표.png',
-                sample: 561,
-                slogan: '글로벌 명품도시 대구',
-                ages: { '20대': 15, '30대': 13, '40대': 14, '50대': -2, '60대': 4, '70+': 23 },
-                orientation: { '보수': 39, '중도': -6, '진보': -43 }
+                id: 'incheon', name: '인천광역시', governor: '유정복', party: 'ppp',
+                logo: 'governor_photos/incheon.png',
+                governorPhoto: 'governor_photos/incheon_유정복.png',
+                slogan: '기회의 도시 인천',
+                q1: {
+                    positive: 50, negative: 33, netScore: 17, sample: 1026,
+                    ages: { '20대': 29, '30대': 8, '40대': -6, '50대': -2, '60대': 38, '70+': 47 },
+                    orientation: { '보수': 40, '중도': 17, '진보': -10 }
+                },
+                q2: {
+                    positive: 47, negative: 31, netScore: 16, sample: 1124,
+                    ages: { '20대': 44, '30대': -5, '40대': -14, '50대': -4, '60대': 27, '70+': 66 },
+                    orientation: { '보수': 43, '중도': 11, '진보': -11 }
+                }
             },
             {
-                id: 'sejong', name: '세종특별자치시', governor: '최민호', party: 'ppp',
-                positive: 45, negative: 35, netScore: 10,
-                logo: 'governor_photos/sejong.png',
-                governorPhoto: 'governor_photos/sejong_최민호.png',
-                sample: 156,
-                slogan: '행복도시 세종',
-                ages: { '20대': 15, '30대': 10, '40대': 5, '50대': 8, '60대': 12, '70+': 20 },
-                orientation: { '보수': 20, '중도': 10, '진보': -5 }
+                id: 'gyeongbuk', name: '경상북도', governor: '이철우', party: 'ppp',
+                logo: 'governor_photos/gyeongbuk.png',
+                governorPhoto: 'governor_photos/gyeongbuk_이철우.png',
+                slogan: '새바람 행복북도',
+                q1: {
+                    positive: 55, negative: 29, netScore: 26, sample: 847,
+                    ages: { '20대': 18, '30대': 7, '40대': 7, '50대': 22, '60대': 35, '70+': 51 },
+                    orientation: { '보수': 50, '중도': 15, '진보': -18 }
+                },
+                q2: {
+                    positive: 46, negative: 31, netScore: 15, sample: 943,
+                    ages: { '20대': 28, '30대': -18, '40대': -8, '50대': 1, '60대': 20, '70+': 50 },
+                    orientation: { '보수': 37, '중도': -1, '진보': -14 }
+                }
             },
             {
-                id: 'jeju', name: '제주특별자치도', governor: '오영훈', party: 'dem',
-                positive: 47, negative: 39, netScore: 8,
-                logo: 'governor_photos/jeju.png',
-                governorPhoto: 'governor_photos/jeju_오영훈.png',
-                sample: 263,
-                slogan: '탐나는 제주',
-                ages: { '20대': 22, '30대': 8, '40대': -5, '50대': -4, '60대': -4, '70+': 38 },
-                orientation: { '보수': -17, '중도': -7, '진보': 43 }
+                id: 'chungnam', name: '충청남도', governor: '김태흠', party: 'ppp',
+                logo: 'governor_photos/chungnam.png',
+                governorPhoto: 'governor_photos/chungnam_김태흠.png',
+                slogan: '따뜻한 충남',
+                q1: {
+                    positive: 49, negative: 31, netScore: 18, sample: 740,
+                    ages: { '20대': 25, '30대': 17, '40대': -16, '50대': 2, '60대': 27, '70+': 53 },
+                    orientation: { '보수': 44, '중도': 16, '진보': -21 }
+                },
+                q2: {
+                    positive: 44, negative: 30, netScore: 14, sample: 828,
+                    ages: { '20대': 31, '30대': 2, '40대': -5, '50대': -5, '60대': 21, '70+': 44 },
+                    orientation: { '보수': 20, '중도': 14, '진보': 0 }
+                }
+            },
+            {
+                id: 'gyeongnam', name: '경상남도', governor: '박완수', party: 'ppp',
+                logo: 'governor_photos/gyeongnam.png',
+                governorPhoto: 'governor_photos/gyeongnam_박완수.png',
+                slogan: '다시 뛰는 경남',
+                q1: {
+                    positive: 48, negative: 31, netScore: 17, sample: 1047,
+                    ages: { '20대': 26, '30대': 11, '40대': -11, '50대': 3, '60대': 29, '70+': 52 },
+                    orientation: { '보수': 48, '중도': 11, '진보': -25 }
+                },
+                q2: {
+                    positive: 41, negative: 30, netScore: 11, sample: 1214,
+                    ages: { '20대': 42, '30대': 8, '40대': -16, '50대': -4, '60대': 15, '70+': 34 },
+                    orientation: { '보수': 26, '중도': 11, '진보': -20 }
+                }
+            },
+            {
+                id: 'jeonbuk', name: '전북특별자치도', governor: '김관영', party: 'dem',
+                logo: 'governor_photos/jeonbuk.png',
+                governorPhoto: 'governor_photos/jeonbuk_김관영.png',
+                slogan: '천만 전북시대',
+                q1: {
+                    positive: 50, negative: 30, netScore: 20, sample: 622,
+                    ages: { '20대': -6, '30대': -6, '40대': 25, '50대': 11, '60대': 32, '70+': 46 },
+                    orientation: { '보수': 1, '중도': 12, '진보': 31 }
+                },
+                q2: {
+                    positive: 44, negative: 37, netScore: 7, sample: 684,
+                    ages: { '20대': 1, '30대': -32, '40대': 1, '50대': -2, '60대': 18, '70+': 36 },
+                    orientation: { '보수': -5, '중도': 2, '진보': 7 }
+                }
             },
             {
                 id: 'gangwon', name: '강원특별자치도', governor: '김진태', party: 'ppp',
-                positive: 44, negative: 39, netScore: 5,
                 logo: 'governor_photos/gangwon.png',
                 governorPhoto: 'governor_photos/gangwon_김진태.png',
-                sample: 566,
                 slogan: '강원 특별한 시작',
-                ages: { '20대': 16, '30대': -12, '40대': -18, '50대': -36, '60대': 28, '70+': 45 },
-                orientation: { '보수': 42, '중도': 2, '진보': -46 }
-            },
-            {
-                id: 'daejeon', name: '대전광역시', governor: '이장우', party: 'ppp',
-                positive: 42, negative: 41, netScore: 1,
-                logo: 'governor_photos/daejeon.png',
-                governorPhoto: 'governor_photos/daejeon_이장우.png',
-                sample: 488,
-                slogan: '으뜸 대전',
-                ages: { '20대': 1, '30대': -1, '40대': -6, '50대': -16, '60대': 11, '70+': 20 },
-                orientation: { '보수': 41, '중도': -13, '진보': -39 }
+                q1: {
+                    positive: 44, negative: 39, netScore: 5, sample: 566,
+                    ages: { '20대': 16, '30대': -12, '40대': -18, '50대': -36, '60대': 28, '70+': 45 },
+                    orientation: { '보수': 42, '중도': 2, '진보': -46 }
+                },
+                q2: {
+                    positive: 41, negative: 40, netScore: 1, sample: 596,
+                    ages: { '20대': 34, '30대': -48, '40대': -52, '50대': -9, '60대': 14, '70+': 49 },
+                    orientation: { '보수': 35, '중도': -5, '진보': -33 }
+                }
             },
             {
                 id: 'busan', name: '부산광역시', governor: '박형준', party: 'ppp',
-                positive: 43, negative: 44, netScore: -1,
                 logo: 'governor_photos/busan.png',
                 governorPhoto: 'governor_photos/busan_박형준.png',
-                sample: 1247,
                 slogan: '다이나믹 부산',
-                ages: { '20대': -2, '30대': -33, '40대': -35, '50대': -14, '60대': 23, '70+': 45 },
-                orientation: { '보수': 33, '중도': -19, '진보': -47 }
+                q1: {
+                    positive: 43, negative: 44, netScore: -1, sample: 1247,
+                    ages: { '20대': -2, '30대': -33, '40대': -35, '50대': -14, '60대': 23, '70+': 45 },
+                    orientation: { '보수': 33, '중도': -19, '진보': -47 }
+                },
+                q2: {
+                    positive: 38, negative: 45, netScore: -7, sample: 1312,
+                    ages: { '20대': 6, '30대': -28, '40대': -39, '50대': -31, '60대': 7, '70+': 37 },
+                    orientation: { '보수': 21, '중도': -11, '진보': -49 }
+                }
+            },
+            {
+                id: 'jeju', name: '제주특별자치도', governor: '오영훈', party: 'dem',
+                logo: 'governor_photos/jeju.png',
+                governorPhoto: 'governor_photos/jeju_오영훈.png',
+                slogan: '탐나는 제주',
+                q1: {
+                    positive: 47, negative: 39, netScore: 8, sample: 263,
+                    ages: { '20대': 22, '30대': 8, '40대': -5, '50대': -4, '60대': -4, '70+': 38 },
+                    orientation: { '보수': -17, '중도': -7, '진보': 43 }
+                },
+                q2: {
+                    positive: 37, negative: 47, netScore: -10, sample: 268,
+                    ages: { '20대': 22, '30대': -4, '40대': -46, '50대': -8, '60대': -32, '70+': 16 },
+                    orientation: { '보수': -19, '중도': -29, '진보': -2 }
+                }
             },
             {
                 id: 'seoul', name: '서울특별시', governor: '오세훈', party: 'ppp',
-                positive: 41, negative: 48, netScore: -7,
                 logo: 'governor_photos/seoul.png',
                 governorPhoto: 'governor_photos/seoul_오세훈.png',
-                sample: 3362,
                 slogan: '동행·매력 서울',
-                ages: { '20대': 0, '30대': -14, '40대': -32, '50대': -27, '60대': 3, '70+': 38 },
-                orientation: { '보수': 30, '중도': -13, '진보': -54 }
+                q1: {
+                    positive: 41, negative: 48, netScore: -7, sample: 3362,
+                    ages: { '20대': 0, '30대': -14, '40대': -32, '50대': -27, '60대': 3, '70+': 38 },
+                    orientation: { '보수': 30, '중도': -13, '진보': -54 }
+                },
+                q2: {
+                    positive: 38, negative: 49, netScore: -11, sample: 3737,
+                    ages: { '20대': 8, '30대': -8, '40대': -42, '50대': -39, '60대': -5, '70+': 25 },
+                    orientation: { '보수': 23, '중도': -14, '진보': -52 }
+                }
+            },
+            {
+                id: 'daejeon', name: '대전광역시', governor: '이장우', party: 'ppp',
+                logo: 'governor_photos/daejeon.png',
+                governorPhoto: 'governor_photos/daejeon_이장우.png',
+                slogan: '으뜸 대전',
+                q1: {
+                    positive: 42, negative: 41, netScore: 1, sample: 488,
+                    ages: { '20대': 1, '30대': -1, '40대': -6, '50대': -16, '60대': 11, '70+': 20 },
+                    orientation: { '보수': 41, '중도': -13, '진보': -39 }
+                },
+                q2: {
+                    positive: 36, negative: 48, netScore: -12, sample: 509,
+                    ages: { '20대': 8, '30대': -19, '40대': -44, '50대': -35, '60대': -12, '70+': 37 },
+                    orientation: { '보수': 24, '중도': -21, '진보': -60 }
+                }
             },
             {
                 id: 'chungbuk', name: '충청북도', governor: '김영환', party: 'ppp',
-                positive: 37, negative: 46, netScore: -9,
                 logo: 'governor_photos/chungbuk.png',
                 governorPhoto: 'governor_photos/chungbuk_김영환.png',
-                sample: 536,
                 slogan: '생명과 태양의 땅',
-                ages: { '20대': 24, '30대': -13, '40대': -42, '50대': -29, '60대': -11, '70+': 19 },
-                orientation: { '보수': 12, '중도': -14, '진보': -42 }
+                q1: {
+                    positive: 37, negative: 46, netScore: -9, sample: 536,
+                    ages: { '20대': 24, '30대': -13, '40대': -42, '50대': -29, '60대': -11, '70+': 19 },
+                    orientation: { '보수': 12, '중도': -14, '진보': -42 }
+                },
+                q2: {
+                    positive: 32, negative: 48, netScore: -16, sample: 623,
+                    ages: { '20대': 28, '30대': -4, '40대': -50, '50대': -41, '60대': -23, '70+': 8 },
+                    orientation: { '보수': 7, '중도': -23, '진보': -40 }
+                }
+            },
+            {
+                id: 'gwangju', name: '광주광역시', governor: '강기정', party: 'dem',
+                logo: 'governor_photos/gwangju.png',
+                governorPhoto: 'governor_photos/gwangju_강기정.png',
+                slogan: '정의로운 광주',
+                q1: {
+                    positive: 52, negative: 33, netScore: 19, sample: 470,
+                    ages: { '20대': 15, '30대': 11, '40대': 9, '50대': 19, '60대': 22, '70+': 37 },
+                    orientation: { '보수': -14, '중도': 7, '진보': 35 }
+                },
+                q2: {
+                    positive: 27, negative: 60, netScore: -33, sample: 508,
+                    ages: { '20대': -35, '30대': -18, '40대': -51, '50대': -47, '60대': -47, '70+': 14 },
+                    orientation: { '보수': -56, '중도': -34, '진보': -35 }
+                }
+            },
+            {
+                id: 'daegu', name: '대구광역시', governor: '홍준표', party: 'ppp',
+                note: '4월 시장직 사퇴 (공석)',
+                logo: 'governor_photos/daegu.png',
+                governorPhoto: 'governor_photos/daegu_홍준표.png',
+                slogan: '글로벌 명품도시 대구',
+                q1: {
+                    positive: 49, negative: 39, netScore: 10, sample: 561,
+                    ages: { '20대': 15, '30대': 13, '40대': 14, '50대': -2, '60대': 4, '70+': 23 },
+                    orientation: { '보수': 39, '중도': -6, '진보': -43 }
+                },
+                q2: null // 공석
+            },
+            {
+                id: 'sejong', name: '세종특별자치시', governor: '최민호', party: 'ppp',
+                note: '표본수 부족',
+                logo: 'governor_photos/sejong.png',
+                governorPhoto: 'governor_photos/sejong_최민호.png',
+                slogan: '행복도시 세종',
+                q1: {
+                    positive: 45, negative: 35, netScore: 10, sample: 156,
+                    ages: { '20대': 15, '30대': 10, '40대': 5, '50대': 8, '60대': 12, '70+': 20 },
+                    orientation: { '보수': 20, '중도': 10, '진보': -5 }
+                },
+                q2: null // 표본수 부족으로 미제시
             }
         ];
 
@@ -937,29 +1286,35 @@
         const partyColors = { 'ppp': '#C93A40', 'dem': '#2E6EB5' };
         const partyColorsHover = { 'ppp': '#E04850', 'dem': '#3A8AD5' };
 
-        // 지역 카드 생성
+        // 변화량 계산
+        function getChange(region) {
+            if (!region.q1 || !region.q2) return null;
+            return region.q2.netScore - region.q1.netScore;
+        }
+
+        // 현재 데이터 (하반기 우선, 없으면 상반기)
+        function getCurrentData(region) {
+            return region.q2 || region.q1;
+        }
+
+        // 지역 카드 생성 - 미니멀 + 정당색
         function createRegionCard(region) {
-            const scoreClass = region.netScore >= 15 ? 'positive' : (region.netScore < 0 ? 'negative' : 'warning');
+            const current = getCurrentData(region);
+            if (!current) return '';
+
+            const change = getChange(region);
+            const changeClass = change > 0 ? 'up' : (change < 0 ? 'down' : 'same');
+            const regionLogo = regionLogoMap[region.id] || '';
 
             return `
                 <div class="region-card ${region.party}" onclick="openModal('${region.id}')">
-                    <img class="governor-photo" src="${region.governorPhoto}" alt="${region.governor}"
-                         onerror="this.src='https://via.placeholder.com/56x56?text=${region.governor.charAt(0)}'">
-                    <div class="region-info">
-                        <div class="region-header">
-                            <img class="region-logo" src="${region.logo}" alt="${region.name}" onerror="this.style.display='none'">
-                            <span class="region-name">${region.name}</span>
-                        </div>
-                        <div class="governor-name">${region.governor}${region.note ? ' (' + region.note + ')' : ''}</div>
-                        <div class="region-slogan">${region.slogan}</div>
+                    <div class="card-logo-area">
+                        <img class="region-logo-big" src="${regionLogo}" alt="${region.name}"
+                             onerror="this.style.display='none'">
                     </div>
-                    <div class="region-scores">
-                        <div class="net-score ${scoreClass}">${region.netScore >= 0 ? '+' : ''}${region.netScore}</div>
-                        <div class="score-detail">${region.positive}% / ${region.negative}%</div>
-                        <div class="score-bar">
-                            <div class="positive-bar" style="width:${region.positive}%"></div>
-                            <div class="negative-bar" style="width:${region.negative}%"></div>
-                        </div>
+                    <div class="card-meta">
+                        <span class="card-governor">${region.governor}</span>
+                        <span class="card-score ${changeClass}">${current.netScore >= 0 ? '+' : ''}${current.netScore}</span>
                     </div>
                 </div>
             `;
@@ -984,12 +1339,23 @@
         // 순위 렌더링
         function renderRankings() {
             const grid = document.getElementById('rankingsGrid');
-            const sorted = [...regionData].sort((a, b) => b.netScore - a.netScore);
+            // q2 데이터가 있는 지역만 필터링하고 정렬
+            const validRegions = regionData.filter(r => r.q2 !== null);
+            const sorted = [...validRegions].sort((a, b) => b.q2.netScore - a.q2.netScore);
 
             sorted.forEach((region, index) => {
                 const rank = index + 1;
                 const rankClass = rank === 1 ? 'rank-1' : rank === 2 ? 'rank-2' : rank === 3 ? 'rank-3' : 'rank-default';
-                const scoreClass = region.netScore >= 20 ? 'high' : region.netScore >= 0 ? 'mid' : 'low';
+                const current = region.q2;
+                const scoreClass = current.netScore >= 20 ? 'high' : current.netScore >= 0 ? 'mid' : 'low';
+                const change = getChange(region);
+
+                let changeHtml = '';
+                if (change !== null) {
+                    const changeClass = change > 0 ? 'up' : (change < 0 ? 'down' : 'same');
+                    const changeIcon = change > 0 ? '▲' : (change < 0 ? '▼' : '―');
+                    changeHtml = `<span class="change-badge ${changeClass}" style="margin-left:8px;font-size:10px;">${changeIcon}${Math.abs(change)}</span>`;
+                }
 
                 grid.innerHTML += `
                     <div class="rank-card" onclick="openModal('${region.id}')">
@@ -997,174 +1363,222 @@
                         <img class="rank-governor-photo" src="${region.governorPhoto}" alt="${region.governor}"
                              onerror="this.src='https://via.placeholder.com/40x40?text=${region.governor.charAt(0)}'">
                         <div class="rank-info">
-                            <div class="rank-region">${region.name}</div>
+                            <div class="rank-region">${region.name}${changeHtml}</div>
                             <div class="rank-governor">${region.governor} (${region.party === 'ppp' ? '국민의힘' : '민주당'})</div>
                         </div>
-                        <div class="rank-score ${scoreClass}">${region.netScore >= 0 ? '+' : ''}${region.netScore}</div>
+                        <div class="rank-score ${scoreClass}">${current.netScore >= 0 ? '+' : ''}${current.netScore}</div>
                     </div>
                 `;
             });
         }
 
         // Modal
-        let modalAgeChart, modalOrientChart;
+        let modalApprovalChart, modalAgeChart, modalOrientChart;
+        let currentModalRegion = null;
+        let currentModalQuarter = 'q2';
 
         function openModal(id) {
             const region = regionData.find(r => r.id === id);
             if (!region) return;
 
+            currentModalRegion = region;
+            // 하반기 데이터가 있으면 하반기, 없으면 상반기
+            currentModalQuarter = region.q2 ? 'q2' : 'q1';
+
             const headerContent = document.getElementById('modalHeaderContent');
             headerContent.innerHTML = `
-                <img class="modal-governor-photo" src="${region.governorPhoto}" alt="${region.governor}"
-                     onerror="this.src='https://via.placeholder.com/70x70?text=${region.governor.charAt(0)}'">
                 <div class="modal-title-area">
-                    <div class="modal-title">
-                        <img class="modal-logo" src="${region.logo}" alt="${region.name}" onerror="this.style.display='none'">
-                        ${region.name}
-                    </div>
+                    <div class="modal-title">${region.name}</div>
                     <div class="modal-subtitle">${region.governor} (${region.party === 'ppp' ? '국민의힘' : '더불어민주당'})</div>
                     <span class="modal-slogan ${region.party}">${region.slogan}</span>
                 </div>
             `;
 
-            const statusClass = region.netScore < 0 ? 'danger' : region.netScore < 10 ? 'warning' : 'success';
-            const statusTitle = region.netScore < 0 ? '위험 신호' : region.netScore < 10 ? '주의 필요' : '안정적';
-            const statusMsg = region.netScore < 0
+            document.getElementById('modalOverlay').classList.add('active');
+            renderModalContent(region);
+        }
+
+        function renderModalContent(region) {
+            const modalBody = document.getElementById('modalBody');
+            const q1 = region.q1;
+            const q2 = region.q2;
+            const hasChange = q1 && q2;
+            const current = currentModalQuarter === 'q2' && q2 ? q2 : q1;
+
+            // 변화 요약 HTML
+            let changeSummaryHtml = '';
+            if (hasChange) {
+                const change = q2.netScore - q1.netScore;
+                const changeClass = change > 0 ? 'up' : (change < 0 ? 'down' : 'same');
+                const changeText = change > 0 ? `+${change}` : (change === 0 ? '±0' : change);
+                const toClass = q2.netScore >= 0 ? 'positive' : 'negative';
+
+                changeSummaryHtml = `
+                    <div class="modal-change-summary">
+                        <div class="modal-change-arrow">
+                            <span class="from">${q1.netScore >= 0 ? '+' : ''}${q1.netScore}</span>
+                            <span class="arrow">→</span>
+                            <span class="to ${toClass}">${q2.netScore >= 0 ? '+' : ''}${q2.netScore}</span>
+                        </div>
+                        <div class="modal-change-delta ${changeClass}">
+                            ${change > 0 ? '▲' : (change < 0 ? '▼' : '―')} ${changeText} (상반기 → 하반기)
+                        </div>
+                    </div>
+                `;
+            }
+
+            // 탭 HTML (상반기/하반기 둘 다 있을 때만)
+            let tabsHtml = '';
+            if (hasChange) {
+                tabsHtml = `
+                    <div class="modal-tabs">
+                        <button class="modal-tab ${currentModalQuarter === 'q1' ? 'active' : ''}" onclick="switchModalTab('q1')">
+                            상반기 (1~6월)
+                        </button>
+                        <button class="modal-tab ${currentModalQuarter === 'q2' ? 'active' : ''}" onclick="switchModalTab('q2')">
+                            하반기 (7~12월)
+                        </button>
+                    </div>
+                `;
+            }
+
+            const netScore = current.netScore;
+            const statusClass = netScore < 0 ? 'danger' : netScore < 10 ? 'warning' : 'success';
+            const statusTitle = netScore < 0 ? '위험 신호' : netScore < 10 ? '주의 필요' : '안정적';
+            const statusMsg = netScore < 0
                 ? '부정 평가가 긍정 평가를 앞서고 있습니다. 핵심 지지층 결집과 부정 여론 해소가 시급합니다.'
-                : region.netScore < 10
+                : netScore < 10
                     ? '긍정과 부정이 팽팽합니다. 적극적인 민심 관리가 필요합니다.'
                     : '비교적 안정적인 지지율을 유지하고 있습니다.';
 
-            const modalBody = document.getElementById('modalBody');
+            const quarterLabel = currentModalQuarter === 'q2' ? '하반기' : '상반기';
+
+            const neutral = 100 - current.positive - current.negative;
+
             modalBody.innerHTML = `
-                <div class="modal-stats">
-                    <div class="modal-stat">
-                        <div class="label">긍정률</div>
-                        <div class="value" style="color:var(--positive)">${region.positive}%</div>
+                ${changeSummaryHtml}
+                ${tabsHtml}
+
+                <div class="modal-stats-mini">
+                    <div class="modal-stat-mini">
+                        <span class="label">Net Score</span>
+                        <span class="value" style="color:${netScore >= 0 ? 'var(--positive)' : 'var(--negative)'}">${netScore >= 0 ? '+' : ''}${netScore}</span>
                     </div>
-                    <div class="modal-stat">
-                        <div class="label">부정률</div>
-                        <div class="value" style="color:var(--negative)">${region.negative}%</div>
-                    </div>
-                    <div class="modal-stat">
-                        <div class="label">Net Score</div>
-                        <div class="value" style="color:${region.netScore >= 0 ? 'var(--positive)' : 'var(--negative)'}">${region.netScore >= 0 ? '+' : ''}${region.netScore}</div>
-                    </div>
-                    <div class="modal-stat">
-                        <div class="label">표본수</div>
-                        <div class="value" style="color:var(--text-mid)">${region.sample.toLocaleString()}</div>
+                    <div class="modal-stat-mini">
+                        <span class="label">표본수</span>
+                        <span class="value">${current.sample.toLocaleString()}명</span>
                     </div>
                 </div>
 
-                <div class="modal-charts">
+                <div class="modal-analysis-row">
                     <div class="chart-box">
-                        <div class="chart-title">연령대별 Net Score</div>
+                        <div class="chart-title">긍정/부정 평가 (${quarterLabel})</div>
                         <div class="chart-container">
-                            <canvas id="modalAgeChart"></canvas>
+                            <canvas id="modalApprovalChart"></canvas>
                         </div>
                     </div>
-                    <div class="chart-box">
-                        <div class="chart-title">정치성향별 Net Score</div>
-                        <div class="chart-container">
-                            <canvas id="modalOrientChart"></canvas>
-                        </div>
+                    <div class="analysis-box">
+                        <div class="analysis-title">연령대별 분석</div>
+                        <div class="analysis-content" id="ageAnalysis"></div>
+                    </div>
+                    <div class="analysis-box">
+                        <div class="analysis-title">정치성향별 분석</div>
+                        <div class="analysis-content" id="orientAnalysis"></div>
                     </div>
                 </div>
 
                 <div class="status-banner ${statusClass}">
-                    <h4>${statusTitle}</h4>
+                    <h4>${statusTitle} (${quarterLabel})</h4>
                     <p>${statusMsg}</p>
                 </div>
             `;
 
-            document.getElementById('modalOverlay').classList.add('active');
-
             // Create charts
             setTimeout(() => {
-                if (modalAgeChart) modalAgeChart.destroy();
-                if (modalOrientChart) modalOrientChart.destroy();
+                if (modalApprovalChart) modalApprovalChart.destroy();
 
-                const ageCtx = document.getElementById('modalAgeChart');
-                const ageData = Object.entries(region.ages);
-
-                modalAgeChart = new Chart(ageCtx, {
-                    type: 'bar',
+                // 긍정/부정 파이차트 (긍정=파랑, 부정=빨강)
+                const approvalCtx = document.getElementById('modalApprovalChart');
+                modalApprovalChart = new Chart(approvalCtx, {
+                    type: 'doughnut',
                     data: {
-                        labels: ageData.map(([k]) => k),
+                        labels: ['긍정', '부정', '모름/무응답'],
                         datasets: [{
-                            data: ageData.map(([k, v]) => v),
-                            backgroundColor: ageData.map(([k, v]) => v >= 0 ? '#5C9CE5' : '#E57373'),
-                            borderRadius: 6,
-                            borderSkipped: false
+                            data: [current.positive, current.negative, neutral],
+                            backgroundColor: ['#3B82F6', '#EF4444', '#9CA3AF'],
+                            borderWidth: 2,
+                            borderColor: '#fff',
+                            hoverOffset: 8
                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        indexAxis: 'y',
+                        cutout: '55%',
                         plugins: {
-                            legend: { display: false },
-                            datalabels: {
-                                anchor: 'end',
-                                align: 'end',
-                                color: (ctx) => ctx.dataset.data[ctx.dataIndex] >= 0 ? '#5C9CE5' : '#E57373',
-                                font: { weight: 'bold', size: 11 },
-                                formatter: (val) => (val >= 0 ? '+' : '') + val
-                            }
-                        },
-                        scales: {
-                            x: {
-                                grid: { display: false },
-                                ticks: { display: false }
+                            legend: {
+                                display: true,
+                                position: 'bottom',
+                                labels: {
+                                    padding: 12,
+                                    usePointStyle: true,
+                                    pointStyle: 'circle',
+                                    font: { size: 11, weight: '600' }
+                                }
                             },
-                            y: {
-                                grid: { display: false },
-                                ticks: { font: { size: 11 } }
-                            }
-                        }
-                    }
-                });
-
-                const orientCtx = document.getElementById('modalOrientChart');
-                const orientData = Object.entries(region.orientation);
-
-                modalOrientChart = new Chart(orientCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: orientData.map(([k]) => k),
-                        datasets: [{
-                            data: orientData.map(([k, v]) => v),
-                            backgroundColor: orientData.map(([k, v]) => v >= 0 ? '#5C9CE5' : '#E57373'),
-                            borderRadius: 6,
-                            borderSkipped: false
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: false },
                             datalabels: {
-                                anchor: 'end',
-                                align: 'end',
-                                color: (ctx) => ctx.dataset.data[ctx.dataIndex] >= 0 ? '#5C9CE5' : '#E57373',
+                                color: '#fff',
                                 font: { weight: 'bold', size: 12 },
-                                formatter: (val) => (val >= 0 ? '+' : '') + val
-                            }
-                        },
-                        scales: {
-                            x: {
-                                grid: { display: false },
-                                ticks: { font: { size: 12, weight: '600' } }
-                            },
-                            y: {
-                                grid: { color: '#f0f0f0' },
-                                ticks: { display: false }
+                                formatter: (val) => val + '%'
                             }
                         }
                     }
                 });
+
+                // 연령대별 분석
+                const ageEntries = Object.entries(current.ages);
+                const ageSorted = [...ageEntries].sort((a, b) => b[1] - a[1]);
+                const topAge = ageSorted[0];
+                const bottomAge = ageSorted[ageSorted.length - 1];
+
+                document.getElementById('ageAnalysis').innerHTML = `
+                    <div class="analysis-item support">
+                        <div class="analysis-item-label">가장 지지하는 연령대</div>
+                        <div class="analysis-item-value">${topAge[0]}</div>
+                        <div class="analysis-item-score">Net Score ${topAge[1] >= 0 ? '+' : ''}${topAge[1]}</div>
+                    </div>
+                    <div class="analysis-item oppose">
+                        <div class="analysis-item-label">가장 반대하는 연령대</div>
+                        <div class="analysis-item-value">${bottomAge[0]}</div>
+                        <div class="analysis-item-score">Net Score ${bottomAge[1] >= 0 ? '+' : ''}${bottomAge[1]}</div>
+                    </div>
+                `;
+
+                // 정치성향별 분석
+                const orientEntries = Object.entries(current.orientation);
+                const orientSorted = [...orientEntries].sort((a, b) => b[1] - a[1]);
+                const topOrient = orientSorted[0];
+                const bottomOrient = orientSorted[orientSorted.length - 1];
+
+                document.getElementById('orientAnalysis').innerHTML = `
+                    <div class="analysis-item support">
+                        <div class="analysis-item-label">가장 지지하는 성향</div>
+                        <div class="analysis-item-value">${topOrient[0]}</div>
+                        <div class="analysis-item-score">Net Score ${topOrient[1] >= 0 ? '+' : ''}${topOrient[1]}</div>
+                    </div>
+                    <div class="analysis-item oppose">
+                        <div class="analysis-item-label">가장 반대하는 성향</div>
+                        <div class="analysis-item-value">${bottomOrient[0]}</div>
+                        <div class="analysis-item-score">Net Score ${bottomOrient[1] >= 0 ? '+' : ''}${bottomOrient[1]}</div>
+                    </div>
+                `;
             }, 100);
+        }
+
+        function switchModalTab(quarter) {
+            if (!currentModalRegion) return;
+            currentModalQuarter = quarter;
+            renderModalContent(currentModalRegion);
         }
 
         function closeModal() {
@@ -1177,8 +1591,8 @@
 
         // D3.js로 지도 렌더링 (제주도 포함되도록 조정)
         async function renderMap() {
-            const width = 520;
-            const height = 720;
+            const width = 780;
+            const height = 1080;
 
             const svg = d3.select('#mapContainer')
                 .append('svg')
@@ -1189,12 +1603,13 @@
             try {
                 const response = await fetch('https://raw.githubusercontent.com/southkorea/southkorea-maps/master/kostat/2018/json/skorea-provinces-2018-topo-simple.json');
                 const topoData = await response.json();
+
                 let geojson = topojson.feature(topoData, topoData.objects.skorea_provinces_2018_geo);
 
                 // 제주도가 보이도록 중심점과 스케일 조정
                 const projection = d3.geoMercator()
                     .center([127.5, 35.5])
-                    .scale(5200)
+                    .scale(7800)
                     .translate([width / 2, height / 2]);
 
                 const path = d3.geoPath().projection(projection);
@@ -1262,39 +1677,20 @@
                     })
                     .style('pointer-events', 'none');
 
-                // 지역명
+                // 지역명만 표시
                 labels.append('text')
-                    .attr('y', -6)
                     .attr('text-anchor', 'middle')
-                    .style('font-size', '12px')
+                    .style('font-size', '14px')
                     .style('font-weight', '700')
                     .style('fill', '#ffffff')
-                    .style('text-shadow', '1px 1px 2px rgba(0,0,0,0.5)')
+                    .style('text-shadow', '1px 1px 3px rgba(0,0,0,0.6)')
                     .text(d => shortNames[d.properties.name] || d.properties.name);
-
-                // Net Score
-                labels.append('text')
-                    .attr('y', 10)
-                    .attr('text-anchor', 'middle')
-                    .style('font-size', '11px')
-                    .style('font-weight', '800')
-                    .style('fill', '#ffffff')
-                    .style('text-shadow', '1px 1px 2px rgba(0,0,0,0.5)')
-                    .text(d => {
-                        const id = codeToId[d.properties.code];
-                        const region = regionData.find(r => r.id === id);
-                        if (region) {
-                            return (region.netScore >= 0 ? '+' : '') + region.netScore;
-                        }
-                        return '';
-                    });
 
             } catch (error) {
                 console.error('지도 로딩 실패:', error);
                 document.getElementById('mapContainer').innerHTML = '<p style="text-align:center;padding:50px;color:#999;">지도 로딩 중 오류가 발생했습니다.</p>';
             }
         }
-
         // Initialize
         renderCards();
         renderRankings();
