@@ -42,10 +42,15 @@
 
         /* 헤더 */
         .header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
             background: linear-gradient(135deg, #FFD93D 0%, #FF9F45 100%);
             color: white;
             padding: 30px 20px;
-            text-align: center;
+            text-align: left;
         }
 
         .header h1 {
@@ -55,13 +60,17 @@
         }
 
         .header p {
+        }
+
+        .header-text {
+            text-align: left;
             opacity: 0.9;
             font-size: 0.95rem;
         }
 
         .logo {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 0;
         }
 
         .logo img {
@@ -109,7 +118,7 @@
 
         .input-group input.large {
             font-size: 2rem;
-            text-align: center;
+            text-align: left;
             letter-spacing: 10px;
             font-weight: 700;
         }
@@ -169,7 +178,7 @@
             color: white;
             border-radius: 20px;
             padding: 30px;
-            text-align: center;
+            text-align: left;
             margin-bottom: 25px;
             box-shadow: 0 10px 30px rgba(255, 159, 69, 0.3);
         }
@@ -177,7 +186,7 @@
         .balance-card .label {
             font-size: 0.95rem;
             opacity: 0.9;
-            margin-bottom: 10px;
+            margin-bottom: 0;
         }
 
         .balance-card .amount {
@@ -297,7 +306,7 @@
             border-radius: 16px;
             background: white;
             cursor: pointer;
-            text-align: center;
+            text-align: left;
             transition: all 0.2s;
         }
 
@@ -316,7 +325,12 @@
         }
 
         /* 관리자 대시보드 */
-        .admin-header {
+        .admin.header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
@@ -340,7 +354,7 @@
             padding: 15px;
             background: #f8f9fa;
             border-radius: 12px;
-            margin-bottom: 10px;
+            margin-bottom: 0;
             cursor: pointer;
             transition: background 0.2s;
         }
@@ -393,7 +407,12 @@
             overflow-y: auto;
         }
 
-        .modal-header {
+        .modal.header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
@@ -467,7 +486,7 @@
             padding: 15px;
             border-radius: 12px;
             margin-bottom: 15px;
-            text-align: center;
+            text-align: left;
         }
 
         .message.error {
@@ -482,7 +501,7 @@
 
         /* 로딩 */
         .loading {
-            text-align: center;
+            text-align: left;
             padding: 40px;
             color: #666;
         }
@@ -513,7 +532,7 @@
             border: none;
             background: white;
             cursor: pointer;
-            text-align: center;
+            text-align: left;
             font-family: inherit;
             transition: background 0.2s;
         }
@@ -539,7 +558,7 @@
 
         /* 빈 상태 */
         .empty-state {
-            text-align: center;
+            text-align: left;
             padding: 40px 20px;
             color: #999;
         }
@@ -562,7 +581,7 @@
             padding: 15px;
             background: #f8f9fa;
             border-radius: 12px;
-            margin-bottom: 10px;
+            margin-bottom: 0;
         }
 
         .price-item .service-name {
@@ -744,7 +763,12 @@
         }
 
         /* 블로그 섹션 */
-        .blog-header {
+        .blog.header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
@@ -783,7 +807,7 @@
             border-radius: 20px;
             font-size: 0.75rem;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 0;
         }
 
         .blog-card .blog-title {
@@ -798,7 +822,7 @@
             font-size: 0.9rem;
             color: #666;
             line-height: 1.5;
-            margin-bottom: 10px;
+            margin-bottom: 0;
         }
 
         .blog-card .blog-meta {
@@ -807,7 +831,12 @@
         }
 
         /* 블로그 상세 */
-        .blog-detail-header {
+        .blog-detail.header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
             margin-bottom: 20px;
         }
 
@@ -826,7 +855,7 @@
             font-size: 1.4rem;
             color: #333;
             line-height: 1.4;
-            margin-bottom: 10px;
+            margin-bottom: 0;
         }
 
         .blog-detail-header .meta {
@@ -884,7 +913,7 @@
         .footer {
             background: #f8f9fa;
             padding: 20px;
-            text-align: center;
+            text-align: left;
             border-top: 1px solid #eee;
         }
 
@@ -960,6 +989,11 @@
             }
 
             .header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
                 padding: 40px 30px;
             }
 
@@ -1018,6 +1052,11 @@
             }
 
             .header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
                 padding: 50px 40px;
             }
 
@@ -1026,6 +1065,10 @@
             }
 
             .header p {
+        }
+
+        .header-text {
+            text-align: left;
                 font-size: 1.1rem;
             }
 
@@ -1147,6 +1190,11 @@
         }
 
         body.dark-mode .header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
             background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
         }
 
@@ -1314,7 +1362,6 @@
             box-shadow: 0 2px 10px rgba(255,105,180,0.3);
         }
     </style>
-        }
 </head>
 <body>
 
@@ -1327,8 +1374,7 @@
     <div id="screen-home" class="screen active">
         <div class="header">
             <div class="logo"><img src="logo.png" alt="살롱페이"></div>
-            <h1>살롱페이</h1>
-            <p>미용실 선불 잔액 관리</p>
+            <div class="header-text"><h1>살롱페이</h1><p>미용실 선불 잔액 관리</p></div>
         </div>
         <div class="content">
             <div class="mode-selector">
