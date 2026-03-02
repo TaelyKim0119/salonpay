@@ -1468,7 +1468,7 @@
     <!-- 블로그 목록 화면 -->
     <div id="screen-blog" class="screen">
         <div class="header">
-            <div class="logo"><img src="logo.png" alt="살롱페이"></div>
+            <div class="logo"><img src="magazine.png" alt="살롱페이"></div>
             <h1>헤어 뷰티 매거진</h1>
             <p>전문가가 알려주는 헤어 케어 팁</p>
         </div>
@@ -3489,12 +3489,15 @@
     function toggleDarkMode() {
         document.body.classList.toggle("dark-mode");
         const btn = document.querySelector(".dark-toggle");
+        const mainLogo = document.querySelector("#screen-home .logo img");
         if (document.body.classList.contains("dark-mode")) {
             btn.textContent = "☀️";
             localStorage.setItem("darkMode", "true");
+            if (mainLogo) mainLogo.src = "magazine.png";
         } else {
             btn.textContent = "🌙";
             localStorage.setItem("darkMode", "false");
+            if (mainLogo) mainLogo.src = "logo.png";
         }
     }
 
@@ -3502,6 +3505,8 @@
     if (localStorage.getItem("darkMode") === "true") {
         document.body.classList.add("dark-mode");
         document.querySelector(".dark-toggle").textContent = "☀️";
+        const mainLogo = document.querySelector("#screen-home .logo img");
+        if (mainLogo) mainLogo.src = "magazine.png";
     }
 </script>
 
