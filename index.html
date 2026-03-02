@@ -26,14 +26,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 5px;
+            padding: 3px;
         }
 
         .container {
             background: white;
             width: 100%;
             max-width: 420px;
-            border-radius: 24px;
+            border-radius: 12px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             overflow: hidden;
             height: calc(100vh - 10px);
@@ -45,20 +45,20 @@
         .header {
             background: linear-gradient(135deg, #FFD93D 0%, #FF9F45 100%);
             color: white;
-            padding: 12px 10px;
+            padding: 8px 8px;
             text-align: center;
             flex-shrink: 0;
         }
 
         .header h1 {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: 700;
             margin-bottom: 3px;
         }
 
         .header p {
             opacity: 0.9;
-            font-size: 0.95rem;
+            font-size: 0.65rem;
         }
 
         .logo {
@@ -66,14 +66,14 @@
         }
 
         .logo img {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             object-fit: contain;
         }
 
         /* 컨텐츠 영역 */
         .content {
-            padding: 12px 15px;
+            padding: 8px 12px;
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -91,7 +91,7 @@
 
         .input-group label {
             display: block;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
             font-weight: 500;
             color: #333;
         }
@@ -112,7 +112,7 @@
         }
 
         .input-group input.large {
-            font-size: 1.5rem;
+            font-size: 1rem;
             text-align: center;
             letter-spacing: 10px;
             font-weight: 700;
@@ -121,7 +121,7 @@
         /* 버튼 */
         .btn {
             width: 100%;
-            padding: 16px;
+            padding: 10px;
             border: none;
             border-radius: 12px;
             font-size: 1.1rem;
@@ -163,7 +163,7 @@
 
         .btn-small {
             padding: 10px 20px;
-            font-size: 0.95rem;
+            font-size: 0.65rem;
             width: auto;
         }
 
@@ -179,7 +179,7 @@
         }
 
         .balance-card .label {
-            font-size: 0.95rem;
+            font-size: 0.65rem;
             opacity: 0.9;
             margin-bottom: 3px;
         }
@@ -200,8 +200,8 @@
         .coupon-card {
             background: linear-gradient(135deg, #FFE066 0%, #FFD93D 100%);
             color: #5D4E37;
-            border-radius: 16px;
-            padding: 5px;
+            border-radius: 12px;
+            padding: 3px;
             padding-right: 100px;
             margin-bottom: 20px;
             position: relative;
@@ -214,8 +214,8 @@
             right: 10px;
             top: 50%;
             transform: translateY(-50%);
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             background: url('birthday.png') no-repeat center;
             background-size: contain;
         }
@@ -227,7 +227,7 @@
         }
 
         .coupon-card .coupon-desc {
-            font-size: 0.9rem;
+            font-size: 0.75rem;
             opacity: 0.9;
         }
 
@@ -235,7 +235,7 @@
         .history-section h3 {
             font-size: 1rem;
             color: #666;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -269,7 +269,7 @@
         }
 
         .history-item .date {
-            font-size: 0.85rem;
+            font-size: 0.7rem;
             color: #999;
         }
 
@@ -288,15 +288,15 @@
         /* 모드 선택 */
         .mode-selector {
             display: flex;
-            gap: 10px;
+            gap: 6px;
             margin-bottom: 25px;
         }
 
         .mode-btn {
             flex: 1;
-            padding: 5px;
+            padding: 3px;
             border: 2px solid #e0e0e0;
-            border-radius: 16px;
+            border-radius: 12px;
             background: white;
             cursor: pointer;
             text-align: center;
@@ -308,8 +308,8 @@
         }
 
         .mode-btn .icon {
-            font-size: 1.5rem;
-            margin-bottom: 4px;
+            font-size: 1rem;
+            margin-bottom: 2px;
         }
 
         .mode-btn .text {
@@ -326,7 +326,7 @@
         }
 
         .admin-header h2 {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             color: #333;
         }
 
@@ -357,7 +357,7 @@
         }
 
         .customer-item .info p {
-            font-size: 0.85rem;
+            font-size: 0.7rem;
             color: #666;
         }
 
@@ -378,7 +378,7 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            padding: 5px;
+            padding: 3px;
         }
 
         .modal.active {
@@ -403,13 +403,13 @@
         }
 
         .modal-header h3 {
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
 
         .modal-close {
             background: none;
             border: none;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             cursor: pointer;
             color: #999;
         }
@@ -418,8 +418,8 @@
         .quick-amounts {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 4px;
+            gap: 6px;
+            margin-bottom: 2px;
         }
 
         .quick-amount-btn {
@@ -443,7 +443,7 @@
             gap: 5px;
             margin-bottom: 20px;
             background: #f0f0f0;
-            padding: 5px;
+            padding: 3px;
             border-radius: 12px;
         }
 
@@ -468,7 +468,7 @@
         .message {
             padding: 15px;
             border-radius: 12px;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
             text-align: center;
         }
 
@@ -525,7 +525,7 @@
         }
 
         .nav-item .icon {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             margin-bottom: 3px;
         }
 
@@ -548,7 +548,7 @@
 
         .empty-state .icon {
             font-size: 3rem;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         /* 서비스 가격표 */
@@ -586,7 +586,7 @@
             border: none;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 0.7rem;
         }
 
         .btn-edit {
@@ -603,22 +603,22 @@
         .reminder-card {
             background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
             color: white;
-            border-radius: 16px;
-            padding: 5px;
+            border-radius: 12px;
+            padding: 3px;
             margin-bottom: 20px;
         }
 
         .reminder-card .reminder-title {
             font-weight: 700;
             font-size: 1rem;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
         .reminder-card .reminder-desc {
-            font-size: 0.9rem;
+            font-size: 0.75rem;
             opacity: 0.95;
         }
 
@@ -637,7 +637,7 @@
             display: inline-block;
             padding: 4px 10px;
             border-radius: 8px;
-            font-size: 0.8rem;
+            font-size: 0.65rem;
             font-weight: 500;
         }
 
@@ -676,7 +676,7 @@
             padding: 12px;
             background: #f8f9fa;
             border-radius: 10px;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .history-item-admin .history-info {
@@ -686,11 +686,11 @@
         .history-item-admin .history-service {
             font-weight: 600;
             color: #333;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .history-item-admin .history-date {
-            font-size: 0.8rem;
+            font-size: 0.65rem;
             color: #999;
         }
 
@@ -717,14 +717,14 @@
             border: none;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.65rem;
         }
 
         /* 서비스 입력 폼 */
         .service-form {
             display: flex;
-            gap: 10px;
-            margin-bottom: 4px;
+            gap: 6px;
+            margin-bottom: 2px;
         }
 
         .service-form input {
@@ -754,7 +754,7 @@
         }
 
         .blog-header h2 {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             color: #333;
         }
 
@@ -765,9 +765,9 @@
 
         .blog-card {
             background: #f8f9fa;
-            border-radius: 16px;
-            padding: 5px;
-            margin-bottom: 4px;
+            border-radius: 12px;
+            padding: 3px;
+            margin-bottom: 2px;
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -792,19 +792,19 @@
             font-size: 1.1rem;
             font-weight: 700;
             color: #333;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
             line-height: 1.4;
         }
 
         .blog-card .blog-excerpt {
-            font-size: 0.9rem;
+            font-size: 0.75rem;
             color: #666;
             line-height: 1.5;
             margin-bottom: 3px;
         }
 
         .blog-card .blog-meta {
-            font-size: 0.8rem;
+            font-size: 0.65rem;
             color: #999;
         }
 
@@ -819,7 +819,7 @@
             color: white;
             padding: 4px 12px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.65rem;
             font-weight: 600;
             margin-bottom: 12px;
         }
@@ -832,7 +832,7 @@
         }
 
         .blog-detail-header .meta {
-            font-size: 0.85rem;
+            font-size: 0.7rem;
             color: #999;
         }
 
@@ -842,7 +842,7 @@
         }
 
         .blog-content h2 {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #333;
             margin: 25px 0 15px;
             padding-bottom: 8px;
@@ -856,7 +856,7 @@
         }
 
         .blog-content p {
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .blog-content ul, .blog-content ol {
@@ -865,7 +865,7 @@
         }
 
         .blog-content li {
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .blog-content .tip-box {
@@ -879,13 +879,13 @@
         .blog-content .tip-box .tip-title {
             font-weight: 700;
             color: #FF9F45;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         /* 푸터 */
         .footer {
             background: #f8f9fa;
-            padding: 5px;
+            padding: 3px;
             text-align: center;
             border-top: 1px solid #eee;
             flex-shrink: 0;
@@ -894,15 +894,15 @@
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-bottom: 4px;
+            gap: 6px;
+            margin-bottom: 2px;
             flex-wrap: wrap;
         }
 
         .footer-links a {
             color: #666;
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.7rem;
         }
 
         .footer-links a:hover {
@@ -910,9 +910,9 @@
         }
 
         .footer-info {
-            font-size: 0.8rem;
+            font-size: 0.65rem;
             color: #999;
-            line-height: 1.6;
+            line-height: 1.3;
         }
 
         /* 정책 페이지 */
@@ -937,7 +937,7 @@
 
         .policy-content p {
             margin-bottom: 12px;
-            font-size: 0.9rem;
+            font-size: 0.75rem;
         }
 
         .policy-content ul {
@@ -947,7 +947,7 @@
 
         .policy-content li {
             margin-bottom: 6px;
-            font-size: 0.9rem;
+            font-size: 0.75rem;
         }
 
         /* ========== 반응형 디자인 ========== */
@@ -1059,7 +1059,7 @@
             }
 
             .balance-card .customer-name {
-                font-size: 1.2rem;
+                font-size: 1rem;
             }
 
             .mode-selector {
@@ -1105,11 +1105,11 @@
             }
 
             .nav-item .icon {
-                font-size: 1.3rem;
+                font-size: 1.1rem;
             }
 
             .nav-item .text {
-                font-size: 0.8rem;
+                font-size: 0.65rem;
             }
 
             .modal-content {
@@ -1119,7 +1119,7 @@
             }
 
             .blog-card {
-                padding: 5px;
+                padding: 3px;
             }
         }
 
@@ -1302,7 +1302,7 @@
             background: rgba(255,255,255,0.9);
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
             cursor: pointer;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             z-index: 9999;
             transition: all 0.3s;
         }
@@ -1340,10 +1340,10 @@
                     <div class="text">관리자</div>
                 </div>
             </div>
-            <button class="btn btn-outline" onclick="showScreen('blog')" style="margin-top:8px;">
+            <button class="btn btn-outline" onclick="showScreen('blog')" style="margin-top:5px;">
                 💇 헤어 뷰티 매거진 보기
             </button>
-            <p style="text-align:center; color:#999; font-size:0.9rem; margin-top:8px;">
+            <p style="text-align:center; color:#999; font-size:0.9rem; margin-top:5px;">
                 이름과 전화번호 뒷자리로<br>간편하게 잔액을 확인하세요
             </p>
         </div>
