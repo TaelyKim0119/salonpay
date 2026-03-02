@@ -36,7 +36,9 @@
             border-radius: 24px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             overflow: hidden;
-            max-height: calc(100vh - 10px);
+            height: calc(100vh - 10px);
+            display: flex;
+            flex-direction: column;
         }
 
         /* 헤더 */
@@ -45,6 +47,7 @@
             color: white;
             padding: 12px 10px;
             text-align: center;
+            flex-shrink: 0;
         }
 
         .header h1 {
@@ -71,11 +74,15 @@
         /* 컨텐츠 영역 */
         .content {
             padding: 12px 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         /* 화면 전환 */
         .screen { display: none; }
-        .screen.active { display: block; }
+        .screen.active { display: flex; flex-direction: column; height: 100%; }
 
         /* 입력 필드 */
         .input-group {
@@ -199,7 +206,6 @@
             margin-bottom: 20px;
             position: relative;
             overflow: hidden;
-            max-height: calc(100vh - 10px);
         }
 
         .coupon-card::before {
@@ -882,6 +888,7 @@
             padding: 5px;
             text-align: center;
             border-top: 1px solid #eee;
+            flex-shrink: 0;
         }
 
         .footer-links {
@@ -1333,10 +1340,10 @@
                     <div class="text">관리자</div>
                 </div>
             </div>
-            <button class="btn btn-outline" onclick="showScreen('blog')" style="margin-top:15px;">
+            <button class="btn btn-outline" onclick="showScreen('blog')" style="margin-top:8px;">
                 💇 헤어 뷰티 매거진 보기
             </button>
-            <p style="text-align:center; color:#999; font-size:0.9rem; margin-top:15px;">
+            <p style="text-align:center; color:#999; font-size:0.9rem; margin-top:8px;">
                 이름과 전화번호 뒷자리로<br>간편하게 잔액을 확인하세요
             </p>
         </div>
