@@ -941,6 +941,194 @@
             font-size: 0.9rem;
         }
     </style>
+
+        /* ========== 반응형 디자인 ========== */
+
+        /* 태블릿 (481px ~ 768px) */
+        @media screen and (min-width: 481px) {
+            body {
+                padding: 30px;
+            }
+
+            .container {
+                max-width: 580px;
+            }
+
+            .header {
+                padding: 40px 30px;
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .logo img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .content {
+                padding: 35px 30px;
+            }
+
+            .balance-card {
+                padding: 35px;
+            }
+
+            .balance-card .amount {
+                font-size: 3rem;
+            }
+
+            .mode-btn {
+                padding: 25px;
+            }
+
+            .mode-btn .icon {
+                font-size: 2.5rem;
+            }
+
+            .customer-list {
+                max-height: 400px;
+            }
+
+            .history-list {
+                max-height: 300px;
+            }
+
+            .modal-content {
+                max-width: 500px;
+                margin: 50px auto;
+            }
+        }
+
+        /* 데스크톱 (769px 이상) */
+        @media screen and (min-width: 769px) {
+            body {
+                padding: 40px;
+            }
+
+            .container {
+                max-width: 720px;
+            }
+
+            .header {
+                padding: 50px 40px;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .header p {
+                font-size: 1.1rem;
+            }
+
+            .logo img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .content {
+                padding: 40px;
+            }
+
+            .input-group input, .input-group select {
+                padding: 18px;
+                font-size: 1.15rem;
+            }
+
+            .btn {
+                padding: 18px;
+                font-size: 1.15rem;
+            }
+
+            .balance-card {
+                padding: 40px;
+            }
+
+            .balance-card .amount {
+                font-size: 3.5rem;
+            }
+
+            .balance-card .customer-name {
+                font-size: 1.2rem;
+            }
+
+            .mode-selector {
+                gap: 15px;
+            }
+
+            .mode-btn {
+                padding: 30px;
+                border-radius: 20px;
+            }
+
+            .mode-btn .icon {
+                font-size: 3rem;
+                margin-bottom: 12px;
+            }
+
+            .mode-btn .text {
+                font-size: 1.1rem;
+            }
+
+            .customer-list {
+                max-height: 500px;
+            }
+
+            .customer-item {
+                padding: 18px;
+            }
+
+            .customer-item .info h4 {
+                font-size: 1.1rem;
+            }
+
+            .history-list {
+                max-height: 350px;
+            }
+
+            .history-item {
+                padding: 15px 0;
+            }
+
+            .nav-bar {
+                padding: 18px;
+            }
+
+            .nav-item .icon {
+                font-size: 1.5rem;
+            }
+
+            .nav-item .text {
+                font-size: 0.8rem;
+            }
+
+            .modal-content {
+                max-width: 600px;
+                margin: 80px auto;
+                border-radius: 20px;
+            }
+
+            .blog-card {
+                padding: 20px;
+            }
+        }
+
+        /* 대형 데스크톱 (1024px 이상) */
+        @media screen and (min-width: 1024px) {
+            .container {
+                max-width: 800px;
+            }
+
+            .header h1 {
+                font-size: 2.8rem;
+            }
+
+            .balance-card .amount {
+                font-size: 4rem;
+            }
+        }
 </head>
 <body>
 
