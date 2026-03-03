@@ -21,23 +21,20 @@
 
         body {
             font-family: 'Noto Sans KR', sans-serif;
-            background: linear-gradient(135deg, #FFD93D 0%, #FF9F45 100%);
+            background: white;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 20px;
+            display: block;
+            padding: 0;
+            margin: 0;
         }
 
         .container {
             background: white;
             width: 100%;
-            max-width: 550px;
-            border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 100%;
+            border-radius: 0;
+            box-shadow: none;
             overflow: auto;
-            transform: scale(0.70);
-            transform-origin: center center;
         }
 
         /* 헤더 */
@@ -211,8 +208,6 @@
             margin-bottom: 20px;
             position: relative;
             overflow: auto;
-            transform: scale(0.70);
-            transform-origin: center center;
         }
 
         .coupon-card::before {
@@ -985,7 +980,7 @@
             }
 
             .container {
-                max-width: 580px;
+                max-width: 100%;
             }
 
             .header {
@@ -1044,11 +1039,11 @@
         /* 데스크톱 (769px 이상) */
         @media screen and (min-width: 769px) {
             body {
-                padding: 40px;
+                padding: 0;
             }
 
             .container {
-                max-width: 720px;
+                max-width: 100%;
             }
 
             .header {
@@ -1168,7 +1163,7 @@
         /* 대형 데스크톱 (1024px 이상) */
         @media screen and (min-width: 1024px) {
             .container {
-                max-width: 800px;
+                max-width: 100%;
             }
 
             .header h1 {
@@ -1182,7 +1177,7 @@
 
         /* ========== 다크 모드 (핑크 테마) ========== */
         body.dark-mode {
-            background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
+            background: #1a1a1a;
         }
 
         body.dark-mode .container {
