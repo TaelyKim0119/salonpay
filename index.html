@@ -317,24 +317,28 @@
         /* 모드 선택 */
         .mode-selector {
             display: flex;
-            gap: 25px;
+            flex-direction: column;
+            gap: 15px;
             margin-bottom: 25px;
-            justify-content: center;
+            width: 100%;
+            max-width: 320px;
         }
 
         .mode-btn {
-            width: 150px;
-            padding: 30px 20px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 15px;
+            padding: 18px 25px;
             border: none;
-            border-radius: 24px;
+            border-radius: 50px;
             background: linear-gradient(145deg, #ffffff 0%, #f8f8f8 100%);
             cursor: pointer;
-            text-align: center;
+            text-align: left;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow:
-                0 10px 30px rgba(255, 107, 107, 0.15),
-                0 5px 15px rgba(0, 0, 0, 0.05),
-                inset 0 -2px 5px rgba(0, 0, 0, 0.02);
+                0 8px 25px rgba(255, 107, 107, 0.15),
+                0 4px 10px rgba(0, 0, 0, 0.05);
             position: relative;
             overflow: hidden;
         }
@@ -342,20 +346,20 @@
         .mode-btn::before {
             content: '';
             position: absolute;
-            top: 0;
             left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #FF6B6B, #FF8E53);
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: linear-gradient(180deg, #FF6B6B, #FF8E53);
             opacity: 0;
             transition: opacity 0.3s;
         }
 
         .mode-btn:hover {
-            transform: translateY(-8px) scale(1.02);
+            transform: translateX(8px) scale(1.02);
             box-shadow:
-                0 20px 40px rgba(255, 107, 107, 0.25),
-                0 10px 20px rgba(0, 0, 0, 0.1);
+                0 15px 35px rgba(255, 107, 107, 0.25),
+                0 8px 15px rgba(0, 0, 0, 0.1);
         }
 
         .mode-btn:hover::before {
@@ -363,14 +367,13 @@
         }
 
         .mode-btn .icon {
-            font-size: 2.5rem;
-            margin-bottom: 12px;
+            flex-shrink: 0;
         }
 
         .mode-btn .text {
             font-weight: 700;
             color: #444;
-            font-size: 1rem;
+            font-size: 1.1rem;
         }
 
         /* 관리자 대시보드 */
@@ -1305,7 +1308,7 @@
         }
 
         body.dark-mode .mode-btn::before {
-            background: linear-gradient(90deg, #FF69B4, #FF1493);
+            background: linear-gradient(180deg, #FF69B4, #FF1493);
         }
 
         body.dark-mode .mode-btn .text {
@@ -1481,11 +1484,11 @@
         <div class="content">
             <div class="mode-selector">
                 <div class="mode-btn" onclick="showScreen('customer-login')">
-                    <div class="icon"><img src="management-icon.png" alt="고객" style="width:80px;height:80px;"></div>
+                    <div class="icon"><img src="management-icon.png" alt="고객" style="width:50px;height:50px;"></div>
                     <div class="text">고객 조회</div>
                 </div>
                 <div class="mode-btn" onclick="showScreen('admin-login')">
-                    <div class="icon"><img src="admin-icon.png" alt="관리자" style="width:100px;height:80px;"></div>
+                    <div class="icon"><img src="admin-icon.png" alt="관리자" style="width:70px;height:50px;"></div>
                     <div class="text">관리자</div>
                 </div>
             </div>
