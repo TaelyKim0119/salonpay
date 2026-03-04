@@ -21,7 +21,7 @@
 
         body {
             font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #ffffff;
+            background: #f5f6fa;
             min-height: 100vh;
             margin: 0;
             padding: 0;
@@ -39,7 +39,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            background: linear-gradient(180deg, #FFF9E6 0%, #ffffff 50%);
+            background: #f5f6fa;
         }
         #screen-home.active {
             display: flex;
@@ -50,7 +50,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 30px 20px;
+            padding: 40px 20px;
         }
 
         /* 헤더 */
@@ -67,39 +67,39 @@
         }
 
         #screen-home .header {
-            padding: 60px 20px 30px;
+            padding: 50px 20px 20px;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px;
         }
 
         .header h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
+            font-size: 1.75rem;
+            font-weight: 700;
             margin-bottom: 0;
-            color: #1a1a1a;
-            letter-spacing: -1px;
+            color: #364a63;
+            letter-spacing: -0.5px;
         }
 
         .header p {
-            color: #666;
-            font-size: 1rem;
+            color: #8094ae;
+            font-size: 0.9rem;
             font-weight: 400;
         }
 
         .header-text {
             text-align: center;
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
 
         .logo {
             display: block;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
 
         .logo img {
             display: block;
-            width: 100px;
-            height: 100px;
+            width: 72px;
+            height: 72px;
             object-fit: contain;
         }
 
@@ -313,63 +313,54 @@
             color: #eb3349;
         }
 
-        /* 모드 선택 - Figma 스타일 */
+        /* 모드 선택 - DashLite 스타일 */
         .mode-selector {
             display: flex;
-            flex-direction: row;
-            gap: 16px;
-            margin-bottom: 30px;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
             width: 100%;
-            max-width: 400px;
-            justify-content: center;
+            max-width: 320px;
         }
 
         .mode-btn {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
-            justify-content: center;
-            gap: 12px;
-            padding: 28px 24px;
-            border: none;
-            border-radius: 24px;
+            gap: 16px;
+            padding: 16px 20px;
+            border: 1px solid #e5e9f2;
+            border-radius: 8px;
             background: #fff;
             cursor: pointer;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            flex: 1;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        .mode-btn:first-child {
-            background: linear-gradient(145deg, #FFE5B4 0%, #FFD180 100%);
-        }
-
-        .mode-btn:last-child {
-            background: linear-gradient(145deg, #E8F5E9 0%, #C8E6C9 100%);
+            text-align: left;
+            transition: all 0.2s ease;
         }
 
         .mode-btn:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            border-color: #6576ff;
+            box-shadow: 0 2px 6px rgba(101, 118, 255, 0.15);
         }
 
         .mode-btn:active {
-            transform: translateY(-2px);
+            background: #f8f9fe;
         }
 
         .mode-btn .icon {
             flex-shrink: 0;
+            width: 48px;
+            height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: #f5f6fa;
+            border-radius: 8px;
         }
 
         .mode-btn .text {
-            font-weight: 700;
-            color: #1a1a1a;
-            font-size: 1rem;
+            font-weight: 600;
+            color: #364a63;
+            font-size: 0.95rem;
         }
 
         /* 관리자 대시보드 */
@@ -734,34 +725,35 @@
         }
 
         .magazine-btn {
-            width: auto;
-            padding: 14px 32px;
-            font-size: 0.95rem;
-            border-radius: 50px;
-            margin-top: 20px;
-            background: #1a1a1a;
-            border: none;
-            color: #fff;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 320px;
+            padding: 12px 20px;
+            font-size: 0.9rem;
+            border-radius: 8px;
+            margin-top: 8px;
+            background: transparent;
+            border: 1px solid #e5e9f2;
+            color: #6576ff;
+            font-weight: 500;
+            transition: all 0.2s ease;
             text-align: center;
         }
 
         .magazine-btn:hover {
-            background: #333;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            background: #6576ff;
+            border-color: #6576ff;
+            color: #fff;
         }
 
         .magazine-btn:active {
-            transform: translateY(0);
+            background: #5464e0;
         }
 
         .home-hint {
             text-align: center;
-            color: #999;
-            font-size: 0.85rem;
-            margin-top: 30px;
+            color: #8094ae;
+            font-size: 0.8rem;
+            margin-top: 32px;
             line-height: 1.6;
         }
 
@@ -989,36 +981,36 @@
             margin-bottom: 8px;
         }
 
-        /* 푸터 - Figma 스타일 */
+        /* 푸터 - DashLite 스타일 */
         .footer {
             background: transparent;
-            padding: 30px 20px;
+            padding: 24px 20px;
             text-align: center;
         }
 
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 24px;
-            margin-bottom: 12px;
+            gap: 20px;
+            margin-bottom: 8px;
             flex-wrap: wrap;
         }
 
         .footer-links a {
-            color: #666;
+            color: #8094ae;
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             transition: color 0.2s;
         }
 
         .footer-links a:hover {
-            color: #1a1a1a;
+            color: #6576ff;
         }
 
         .footer-info {
-            font-size: 0.8rem;
-            color: #999;
-            line-height: 1.6;
+            font-size: 0.75rem;
+            color: #b7c2d0;
+            line-height: 1.5;
         }
 
         /* 정책 페이지 */
@@ -1260,13 +1252,13 @@
             }
         }
 
-        /* ========== 다크 모드 (핑크 테마) ========== */
+        /* ========== 다크 모드 (DashLite 스타일) ========== */
         body.dark-mode {
-            background: #0d0d0d;
+            background: #101924;
         }
 
         body.dark-mode #screen-home {
-            background: linear-gradient(180deg, #1a0a14 0%, #0d0d0d 50%);
+            background: #101924;
         }
 
         body.dark-mode .container {
@@ -1282,7 +1274,7 @@
         }
 
         body.dark-mode .header p {
-            color: #888;
+            color: #8094ae;
         }
 
         body.dark-mode .content {
@@ -1290,7 +1282,7 @@
         }
 
         body.dark-mode .home-hint {
-            color: #777;
+            color: #8094ae;
         }
 
         body.dark-mode .input-group label {
@@ -1299,8 +1291,8 @@
 
         body.dark-mode .input-group input,
         body.dark-mode .input-group select {
-            background: #1a1a1a;
-            border-color: #333;
+            background: #1e2b3c;
+            border-color: #2c3e54;
             color: #fff;
         }
 
@@ -1308,12 +1300,13 @@
             background: transparent;
         }
 
-        body.dark-mode .mode-btn:first-child {
-            background: linear-gradient(145deg, #4a2040 0%, #3d1a35 100%);
+        body.dark-mode .mode-btn {
+            background: #1e2b3c;
+            border-color: #2c3e54;
         }
 
-        body.dark-mode .mode-btn:last-child {
-            background: linear-gradient(145deg, #1a3d2a 0%, #153020 100%);
+        body.dark-mode .mode-btn .icon {
+            background: #253345;
         }
 
         body.dark-mode .mode-btn .text {
@@ -1321,17 +1314,20 @@
         }
 
         body.dark-mode .mode-btn:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(255, 105, 180, 0.2);
+            border-color: #6576ff;
+            box-shadow: 0 2px 6px rgba(101, 118, 255, 0.2);
         }
 
         body.dark-mode .magazine-btn {
-            background: #fff;
-            color: #1a1a1a;
+            background: transparent;
+            border-color: #2c3e54;
+            color: #6576ff;
         }
 
         body.dark-mode .magazine-btn:hover {
-            background: #f0f0f0;
+            background: #6576ff;
+            border-color: #6576ff;
+            color: #fff;
         }
 
         body.dark-mode .footer {
@@ -1339,11 +1335,11 @@
         }
 
         body.dark-mode .footer-links a {
-            color: #888;
+            color: #8094ae;
         }
 
         body.dark-mode .footer-links a:hover {
-            color: #fff;
+            color: #6576ff;
         }
 
         body.dark-mode .btn-primary {
@@ -1494,12 +1490,12 @@
         <div class="content">
             <div class="mode-selector">
                 <div class="mode-btn" onclick="showScreen('customer-login')">
-                    <div class="icon"><img src="management-icon.png" alt="고객" style="width:56px;height:56px;"></div>
-                    <div class="text">고객 조회</div>
+                    <div class="icon"><img src="management-icon.png" alt="고객" style="width:32px;height:32px;"></div>
+                    <div class="text">잔액 조회</div>
                 </div>
                 <div class="mode-btn" onclick="showScreen('admin-login')">
-                    <div class="icon"><img src="admin-icon.png" alt="관리자" style="width:70px;height:56px;"></div>
-                    <div class="text">관리자</div>
+                    <div class="icon"><img src="admin-icon.png" alt="관리자" style="width:40px;height:32px;"></div>
+                    <div class="text">관리자 로그인</div>
                 </div>
             </div>
             <button class="btn btn-outline magazine-btn" onclick="showScreen('blog')">
